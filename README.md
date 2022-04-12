@@ -1,3 +1,4 @@
-# log2-mock
-Log2-mock is a ecom store that uses a mock api that is built using mirageJS.
-live link:https://log2-mock.netlify.app
+# evid-mock
+
+Evid-mock is a video library that uses a mock api that is built using mirageJS.
+live link:https://evid-mock.netlify.app
