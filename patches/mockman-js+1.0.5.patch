@@ -1,0 +1,75 @@
+diff --git a/node_modules/mockman-js/dist/mockman.es.js b/node_modules/mockman-js/dist/mockman.es.js
+index 2547b27..0ca91aa 100644
+--- a/node_modules/mockman-js/dist/mockman.es.js
++++ b/node_modules/mockman-js/dist/mockman.es.js
+@@ -1079,9 +1079,7 @@ const InputForm = ({ data: data2, setData }) => {
+       try {
+         const response = await axios.request(reqOptions);
+         setData(__spreadProps(__spreadValues({}, data2), { response }));
+-        console.log(response, "response");
+       } catch (err) {
+-        console.log(err, "error");
+         if (err.description == "Mirage: undefined") {
+           setData(__spreadProps(__spreadValues({}, data2), { response: err }));
+         } else {
+@@ -1096,13 +1094,17 @@ const InputForm = ({ data: data2, setData }) => {
+   }, /* @__PURE__ */ React.createElement("select", {
+     name: "reqType",
+     id: "reqType",
+-    defaultValue: "GET",
++    defaultValue: "POST",
+     onChange: (e) => setData(__spreadProps(__spreadValues({}, data2), { reqType: e.target.value }))
+   }, /* @__PURE__ */ React.createElement("option", {
+     value: "GET"
+   }, "GET"), /* @__PURE__ */ React.createElement("option", {
+     value: "POST"
+   }, "POST"), /* @__PURE__ */ React.createElement("option", {
++    value: "PUT"
++  }, "PUT"), /* @__PURE__ */ React.createElement("option", {
++    value: "PATCH"
++  }, "PATCH"),/* @__PURE__ */ React.createElement("option", {
+     value: "DELETE"
+   }, "DELETE")), /* @__PURE__ */ React.createElement("input", {
+     defaultValue: data2.endpoint,
+@@ -1119,6 +1121,11 @@ const InputContent = ({ error, setError, data: data2, setData }) => {
+       header: "Accept",
+       value: "*/*"
+     },
++    {
++      isUsed: true,
++      header: "authorization",
++      value: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmNjg1OWNkLWM0NzctNGNmNy1hN2ZkLTRmM2IyNDVmYTA4MSIsInVzZXJuYW1lIjoic2p0Z3NoaXZhbSJ9.BHteMGxl8tWRijnSes0YlYXH1YfyTa7n6FlLxAVFNmg"
++    },
+     {
+       isUsed: false,
+       header: "",
+@@ -1173,9 +1180,9 @@ const InputContent = ({ error, setError, data: data2, setData }) => {
+     className: "title"
+   }, "Headers: ", dataHeaders.filter(({ isUsed }) => isUsed === true).length, " "), /* @__PURE__ */ React.createElement("div", {
+     className: "inputHeaders"
+-  }, dataHeaders.map((dataItem) => {
++  }, dataHeaders.map((dataItem,dataItemIndex) => {
+     return /* @__PURE__ */ React.createElement("div", {
+-      className: "inputHeadersItem"
++      className: "inputHeadersItem", key:dataItemIndex
+     }, /* @__PURE__ */ React.createElement("input", {
+       type: "checkbox",
+       value: dataItem.isUsed,
+@@ -1191,7 +1198,7 @@ const InputContent = ({ error, setError, data: data2, setData }) => {
+   })), /* @__PURE__ */ React.createElement("h3", {
+     className: "title"
+   }, "Body:"), /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("textarea", {
+-    defaultValue: "{}",
++    defaultValue: "{ \"id\": \"pastetheidhere\",\n \"action\": \"DEC\" }",
+     onChange: (e) => validateInput(e.target.value)
+   }), /* @__PURE__ */ React.createElement("p", {
+     className: "error"
+@@ -3980,7 +3987,7 @@ const InputResponse = ({ data: data2 }) => {
+ function Mockman({ colorScheme = "standard" }) {
+   const defaultState = {
+     reqType: "GET",
+-    endpoint: "/api/test-todos",
++    endpoint: "/",
+     body: "{}",
+     headers: {},
+     response: {}
