@@ -49,12 +49,7 @@ interface UserSignupInputData {
   password: string;
 }
 
-interface AuthHead {
-  authorization: string;
-}
-
 export type {
-  AuthHead,
   Playlist,
   User,
   UserLoginData,
