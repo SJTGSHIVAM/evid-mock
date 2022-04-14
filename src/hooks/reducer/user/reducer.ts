@@ -8,23 +8,7 @@ import {
 
 import { UserActionType } from './types';
 
-export const useUserReducer = () => {
-  const initialUser: UserLoginData = {
-    id: "",
-    fname: "",
-    lname: "",
-    username: "",
-    dob: "",
-    contact: NaN,
-    email: "",
-    likes: [],
-    watchLater: [],
-    history: [],
-    playlists: [],
-    createdAt: "",
-    updatedAt: "",
-    encodedToken: "",
-  };
+export const useUserReducer = (initialUser: UserLoginData) => {
   const reducerUser = (
     state: UserLoginData,
     action:
@@ -151,5 +135,5 @@ export const useUserReducer = () => {
   };
   const [user, userDispatch] = useReducer(reducerUser, initialUser);
 
-  return [user, userDispatch];
+  return { user, userDispatch };
 };
