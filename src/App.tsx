@@ -15,10 +15,10 @@ import { ToastContainer } from 'react-toastify';
 export default function App() {
   return (
     <>
-      <header className="lg2__header">
+      <header className="">
         <Navbar />{" "}
       </header>
-      <main className="lg2__main tui__m-xl">
+      <main className="">
         <ToastContainer
           position="top-left"
           autoClose={1000}
