@@ -51,7 +51,7 @@ export const videos = [
     An array is a container object that holds a fixed number of values of a single type.
     The length of an array is established when the array is created.
     After creation, its length is fixed.
-    Each item in an array is caldataled an element, and each element is accessed by its numerical index.
+    Each item in an array is called an element, and each element is accessed by its numerical index.
     numbering begins with 0.
     
     Linked list is a linear collection of data elements, in which linear order is not given by their physical placement in memory.
@@ -302,5 +302,101 @@ In computer science, a trie, also called digital tree and sometimes radix tree o
     C. Physical Address (represented in bits): An address actually available on memory unit
     D. Physical Address Space (represented in words or bytes): The set of all physical addresses corresponding to the logical addresses
     `,
+  },
+
+  //   11 [COMPILER]
+
+  {
+    id: "n5UWAaw_byw",
+    tags: ["Compiler Design", "Operator grammar", "precedence parser"],
+    img: "https://i.ytimg.com/vi/n5UWAaw_byw/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAE8K0li5RchrDYgntMtMC3sqC3XA",
+    title: "Compiler Design | Operator grammar & Operator precedence parser ",
+    creator: " Uncode - GATE Computer Science",
+    avatar:
+      "https://yt3.ggpht.com/ytc/AKedOLRPXC-7hvOAts06Sw-GjwR5I9yHXaAMercOvHdK=s88-c-k-c0x00ffffff-no-rj",
+
+    likes: "23K",
+    views: "612K",
+    uploadedOn: "May 23, 2014",
+    about: `In this live lecture, you will prepare the Compiler Design for GATE CSE/IT Exam. Ravindrababu Raula Sir has covered the 'Construction of LL(1) parsing table' from the Compiler Design in this video. `,
+  },
+
+  //   12
+  {
+    id: "ulJm7_aTiQM&t=5s",
+    tags: ["Compiler Design"],
+    img: "https://i.ytimg.com/vi/ulJm7_aTiQM/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCYHTmO0B3hhRutw2hfIfc3FZ2mPw",
+    title: "What Compilers Can and Cannot Do ",
+    creator: "MIT OpenCourseWare",
+    avatar:
+      "https://yt3.ggpht.com/ytc/AKedOLRbjuOeNMWaFQT0ACDvy78heZw1E124RPwrXFIW=s88-c-k-c0x00ffffff-no-rj",
+    likes: "2.5K",
+    views: "43K",
+    uploadedOn: "Sep 23, 2019",
+    about: `MIT 6.172 Performance Engineering of Software Systems, Fall 2018
+    Instructor: Tao B. Schardl
+    View the complete course: https://ocw.mit.edu/6-172F18
+    YouTube Playlist: https://www.youtube.com/playlist?list...
+    
+    T.B. Schardl discusses the Clang/LLVM compilation pipeline as well as reasons to study compiler optimizations, how to use compiler reports, and compiler optimization. Three case studies on diagnosing failures are examined.
+    
+    License: Creative Commons BY-NC-SA
+    More information at https://ocw.mit.edu/terms
+    More courses at https://ocw.mit.edu `,
+  },
+  // 13
+  {
+    id: "UXYqQ_CJsVE",
+    tags: ["Compiler Design", "First and follow"],
+    img: "https://i.ytimg.com/vi/UXYqQ_CJsVE/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC6Rw6KEayx9ocpAWti9RVof-D4dg",
+    title: "Find First() in Compiler Design | First() & Follow() ",
+    creator: "Gate Smashers ",
+    avatar:
+      "https://yt3.ggpht.com/ytc/AKedOLRch3m9ts3nJQihAEKwgigxcNzFSFBF6UlLMvrgZg=s88-c-k-c0x00ffffff-no-rj",
+
+    likes: "7K",
+    views: "319K",
+    uploadedOn: "Sep 22, 2020",
+    about: `Find Follow() https://youtu.be/WUwG50xJ9vc
+
+    ►Full Course of Compiler Design:
+    https://www.youtube.com/playlist?list...
+    
+    ►Subscribe to our new channel:
+    https://www.youtube.com/c/GateSmasher... `,
+  },
+
+  // 14
+  {
+    id: "Qkwj65l_96I",
+    tags: ["Compiler Design", "phases of compiler ", "Introduction"],
+    img: " https://i.ytimg.com/vi/Qkwj65l_96I/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBoXaAPQos-Y_je6HC7qxJsPe7CsA",
+    title: "Compiler Design | Introduction and various phases of compiler ",
+    creator: "Uncode - GATE Computer Science",
+    avatar:
+      "https://yt3.ggpht.com/ytc/AKedOLRPXC-7hvOAts06Sw-GjwR5I9yHXaAMercOvHdK=s88-c-k-c0x00ffffff-no-rj",
+
+    likes: "10K",
+    views: "180K",
+    uploadedOn: "May 21, 2014",
+    about: `Description `,
+  },
+
+  //   15
+  {
+    id: "e4ax90XmUBc",
+    tags: ["Compiler Design", "Compiler vs interpreter", "difference"],
+    img: " https://i.ytimg.com/vi/e4ax90XmUBc/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDRt35mzyceyz3TknDwMP1QmtkQKA",
+    title:
+      "COMPILER| INTERPRETER |Difference between Interpreter and Compiler Animated ",
+    creator: "ISO Training Institute",
+    avatar:
+      "https://yt3.ggpht.com/ytc/AKedOLQ2gMLXXHAWrEKcIrUNS4mDfMfk6OkSa9tSo-mo7A=s88-c-k-c0x00ffffff-no-rj",
+
+    likes: "9.7K",
+    views: "206K",
+    uploadedOn: "Nov 3, 2017",
+    about: `Computer Fundamentals simpliefied | What is COMPILER | What is INTERPRETER | Difference between Interpreter and Compiler
+    -compiler design, interpreter vs compiler, compiler vs interpreter, computer system, Computer basics`,
   },
 ];
