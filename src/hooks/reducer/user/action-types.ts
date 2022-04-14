@@ -7,7 +7,6 @@ export enum UserActionType {
   DEL_LIKED_VIDEO,
   LOGIN,
   LOGOUT,
-  SET_HISTORY,
   ADD_PLAYLIST,
   DEL_PLAYLIST,
   ADD_PLAYLIST_VIDEO,

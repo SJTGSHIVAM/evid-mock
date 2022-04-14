@@ -40,7 +40,7 @@ const getHistory = async (encodedToken: string) =>
     headers: { authorization: encodedToken },
   });
 
-const addHistory = async (video: string, encodedToken: string) =>
+const addHistory = async (video: Video, encodedToken: string) =>
   axios.post<Array<Video>>(
     `${BASE_API_URL}/user/history`,
     { video },
@@ -55,7 +55,7 @@ const removeHistory = async (id: string, encodedToken: string) =>
 const deleteAllHistory = async () =>
   axios.delete<Array<Video>>(`${BASE_API_URL}/user/history/all`);
 
-const addLike = async (video: string, encodedToken: string) =>
+const addLike = async (video: Video, encodedToken: string) =>
   axios.post<Array<Video>>(
     `${BASE_API_URL}/user/likes/`,
     { video },
@@ -67,7 +67,7 @@ const removeLike = async (id: string, encodedToken: string) =>
     headers: { authorization: encodedToken },
   });
 
-const addWatchLater = async (video: string, encodedToken: string) =>
+const addWatchLater = async (video: Video, encodedToken: string) =>
   axios.post<Array<Video>>(
     `${BASE_API_URL}/user/watchlater/`,
     { video },
@@ -84,7 +84,7 @@ const getPlaylists = async (encodedToken: string) =>
     headers: { authorization: encodedToken },
   });
 
-const addPlaylist = async (playlist: string, encodedToken: string) =>
+const addPlaylist = async (playlist: Playlist, encodedToken: string) =>
   axios.post<Array<Playlist>>(`${BASE_API_URL}/user/playlists`, playlist, {
     headers: { authorization: encodedToken },
   });
@@ -100,8 +100,7 @@ const getPlaylistVideos = async (id: string, encodedToken: string) =>
   });
 
 const addPlaylistVideo = async (
-  video: string,
-  playlistId: string,
+  { video, playlistId }: { video: Video; playlistId: string },
   encodedToken: string
 ) =>
   axios.post<Playlist>(
@@ -113,8 +112,7 @@ const addPlaylistVideo = async (
   );
 
 const removePlaylistVideo = async (
-  videoId: string,
-  playlistId: string,
+  { videoId, playlistId }: { videoId: string; playlistId: string },
   encodedToken: string
 ) =>
   axios.delete<Playlist>(
