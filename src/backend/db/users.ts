@@ -15,7 +15,7 @@ export const users = [
     contact: 8057700000,
     email: "randomshivam@gmail.com",
     likes: [videos[0], videos[1], videos[2]],
-    watchlater: [videos[5], videos[3]],
+    watchLater: [videos[5], videos[3]],
     history: [videos[2], videos[0], videos[1], videos[4]],
     playlists: [
       {

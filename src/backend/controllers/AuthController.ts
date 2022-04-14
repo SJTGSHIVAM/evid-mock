@@ -94,7 +94,41 @@ export const loginHandler = function (schema, request) {
         process.env.REACT_APP_JWT_SECRET
       );
       user.password = undefined;
-      return new Response(200, {}, { ...user, encodedToken });
+      const {
+        id,
+        fname,
+        lname,
+        username,
+        dob,
+        contact,
+        email,
+        likes,
+        watchlater,
+        history,
+        playlists,
+        createdAt,
+        updatedAt,
+      } = user;
+      return new Response(
+        201,
+        {},
+        {
+          id,
+          fname,
+          lname,
+          username,
+          dob,
+          contact,
+          email,
+          likes,
+          watchlater,
+          history,
+          playlists,
+          createdAt,
+          updatedAt,
+          encodedToken,
+        }
+      );
     }
     return new Response(
       401,

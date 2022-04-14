@@ -20,23 +20,25 @@ interface Playlist {
   videoList: Array<Video>;
 }
 
-interface User {
+interface UserBase {
   id: string;
   fname: string;
   username: string;
   lname: string;
-  password: string;
   dob: string;
   contact: number;
   email: string;
   likes: Array<Video>;
-  watchlater: Array<Video>;
+  watchLater: Array<Video>;
   history: Array<Video>;
-  playlists: [Playlist];
+  playlists: Array<Playlist>;
   createdAt: string;
   updatedAt: string;
 }
-interface UserLoginData extends User {
+interface User extends UserBase {
+  password: string;
+}
+interface UserLoginData extends UserBase {
   encodedToken: string;
 }
 interface UserSignupInputData {

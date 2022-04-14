@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { BASE_API_URL } from 'consts';
 import {
   Playlist,
   UserLoginData,
@@ -7,10 +8,13 @@ import {
   Video,
 } from 'interfaces';
 
-const getVideos = async () => axios.get("/videos");
+const getVideos = async () => axios.get(`${BASE_API_URL}/videos`);
 
 const userLogin = async ({ username, password }: UserLoginInputData) =>
-  axios.post<UserLoginData>("/user/login", { username, password });
+  axios.post<UserLoginData>(`${BASE_API_URL}/user/login`, {
+    username,
+    password,
+  });
 
 const userSignup = async ({
   fname,
@@ -21,7 +25,7 @@ const userSignup = async ({
   contact,
   password,
 }: UserSignupInputData) =>
-  axios.post<UserLoginData>("/user/signup", {
+  axios.post<UserLoginData>(`${BASE_API_URL}/user/signup`, {
     fname,
     lname,
     username,
@@ -32,66 +36,66 @@ const userSignup = async ({
   });
 
 const getHistory = async (encodedToken: string) =>
-  axios.get<Array<Video>>("/user/history", {
+  axios.get<Array<Video>>(`${BASE_API_URL}/user/history`, {
     headers: { authorization: encodedToken },
   });
 
 const addHistory = async (video: string, encodedToken: string) =>
   axios.post<Array<Video>>(
-    "/user/history",
+    `${BASE_API_URL}/user/history`,
     { video },
     { headers: { authorization: encodedToken } }
   );
 
 const removeHistory = async (id: string, encodedToken: string) =>
-  axios.delete<Array<Video>>("/user/history/" + id, {
+  axios.delete<Array<Video>>(`${BASE_API_URL}/user/history/` + id, {
     headers: { authorization: encodedToken },
   });
 
 const deleteAllHistory = async () =>
-  axios.delete<Array<Video>>("/user/history/all");
+  axios.delete<Array<Video>>(`${BASE_API_URL}/user/history/all`);
 
 const addLike = async (video: string, encodedToken: string) =>
   axios.post<Array<Video>>(
-    "/user/likes/",
+    `${BASE_API_URL}/user/likes/`,
     { video },
     { headers: { authorization: encodedToken } }
   );
 
 const removeLike = async (id: string, encodedToken: string) =>
-  axios.delete<Array<Video>>("/user/likes/" + id, {
+  axios.delete<Array<Video>>(`${BASE_API_URL}/user/likes/` + id, {
     headers: { authorization: encodedToken },
   });
 
 const addWatchLater = async (video: string, encodedToken: string) =>
   axios.post<Array<Video>>(
-    "/user/watchlater/",
+    `${BASE_API_URL}/user/watchlater/`,
     { video },
     { headers: { authorization: encodedToken } }
   );
 
 const removeWatchLater = async (id: string, encodedToken: string) =>
-  axios.delete<Array<Video>>("/user/watchlater/" + id, {
+  axios.delete<Array<Video>>(`${BASE_API_URL}/user/watchlater/` + id, {
     headers: { authorization: encodedToken },
   });
 
 const getPlaylists = async (encodedToken: string) =>
-  axios.get<Array<Playlist>>("/user/playlists", {
+  axios.get<Array<Playlist>>(`${BASE_API_URL}/user/playlists`, {
     headers: { authorization: encodedToken },
   });
 
 const addPlaylist = async (playlist: string, encodedToken: string) =>
-  axios.post<Array<Playlist>>("/user/playlists", playlist, {
+  axios.post<Array<Playlist>>(`${BASE_API_URL}/user/playlists`, playlist, {
     headers: { authorization: encodedToken },
   });
 
 const removePlaylist = async (id: string, encodedToken: string) =>
-  axios.delete<Array<Playlist>>("/user/playlists/" + id, {
+  axios.delete<Array<Playlist>>(`${BASE_API_URL}/user/playlists/` + id, {
     headers: { authorization: encodedToken },
   });
 
 const getPlaylistVideos = async (id: string, encodedToken: string) =>
-  axios.get<Playlist>("/user/playlists/" + id, {
+  axios.get<Playlist>(`${BASE_API_URL}/user/playlists/` + id, {
     headers: { authorization: encodedToken },
   });
 
@@ -101,7 +105,7 @@ const addPlaylistVideo = async (
   encodedToken: string
 ) =>
   axios.post<Playlist>(
-    "/user/playlists/" + playlistId,
+    `${BASE_API_URL}/user/playlists/` + playlistId,
     { video },
     {
       headers: { authorization: encodedToken },
@@ -113,9 +117,15 @@ const removePlaylistVideo = async (
   playlistId: string,
   encodedToken: string
 ) =>
-  axios.delete<Playlist>("/user/playlists/" + playlistId + "/" + videoId, {
-    headers: { authorization: encodedToken },
-  });
+  axios.delete<Playlist>(
+    `${BASE_API_URL}/user/playlists/` +
+      playlistId +
+      `${BASE_API_URL}/` +
+      videoId,
+    {
+      headers: { authorization: encodedToken },
+    }
+  );
 
 export {
   addHistory,
