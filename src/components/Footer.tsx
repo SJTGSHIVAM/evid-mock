@@ -6,8 +6,8 @@ import {
 } from 'react-icons/fa';
 
 export const Footer = ({ className }: { className?: string }) => (
-  <footer className={className}>
-    <ul>
+  <footer className={`${className} grid place-content-center bg-pcol`}>
+    <ul className="flex justify-between p-2">
       <li className="">
         <a href="https://github.com/SJTGSHIVAM" target="blank">
           <FaGithub />

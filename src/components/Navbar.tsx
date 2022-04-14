@@ -1,23 +1,28 @@
 import {
+  BsFillMoonStarsFill,
+  BsSunFill,
+} from 'react-icons/bs';
+import { FcLikePlaceholder } from 'react-icons/fc';
+import {
   toastError,
   toastSuccess,
 } from 'utils';
 
 export const Navbar = () => (
-  <>
+  <nav className="bg-gacol p-4">
     <button
       onClick={() => {
         document.body.classList.add("theme_light");
       }}
     >
-      light
+      <BsSunFill />
     </button>
     <button
       onClick={() => {
         document.body.classList.remove("theme_light");
       }}
     >
-      dark
+      <FcLikePlaceholder />
     </button>
     <button
       onClick={() => {
@@ -25,7 +30,7 @@ export const Navbar = () => (
         toastSuccess();
       }}
     >
-      toast
+      <BsFillMoonStarsFill />
     </button>
-  </>
+  </nav>
 );
