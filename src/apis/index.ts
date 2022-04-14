@@ -8,7 +8,7 @@ import {
   Video,
 } from 'interfaces';
 
-const getVideos = async () => axios.get(`${BASE_API_URL}/videos`);
+const getVideos = async () => axios.get<Array<Video>>(`${BASE_API_URL}/videos`);
 
 const userLogin = async ({ username, password }: UserLoginInputData) =>
   axios.post<UserLoginData>(`${BASE_API_URL}/user/login`, {

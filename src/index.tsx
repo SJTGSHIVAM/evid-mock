@@ -1,5 +1,7 @@
 import 'index.css';
 
+import { UserProvider } from 'hooks/context/user/userContext';
+import { VideoProvider } from 'hooks/context/videoContext';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -12,6 +14,10 @@ const container = document.getElementById("app") as HTMLElement;
 const root = createRoot(container);
 root.render(
   <BrowserRouter>
-    <App />
+    <VideoProvider>
+      <UserProvider>
+        <App />
+      </UserProvider>
+    </VideoProvider>
   </BrowserRouter>
 );
