@@ -1,5 +1,5 @@
 diff --git a/node_modules/mockman-js/dist/mockman.es.js b/node_modules/mockman-js/dist/mockman.es.js
-index 2547b27..0ca91aa 100644
+index 2547b27..02114cb 100644
 --- a/node_modules/mockman-js/dist/mockman.es.js
 +++ b/node_modules/mockman-js/dist/mockman.es.js
 @@ -1079,9 +1079,7 @@ const InputForm = ({ data: data2, setData }) => {
@@ -12,15 +12,7 @@ index 2547b27..0ca91aa 100644
          if (err.description == "Mirage: undefined") {
            setData(__spreadProps(__spreadValues({}, data2), { response: err }));
          } else {
-@@ -1096,13 +1094,17 @@ const InputForm = ({ data: data2, setData }) => {
-   }, /* @__PURE__ */ React.createElement("select", {
-     name: "reqType",
-     id: "reqType",
--    defaultValue: "GET",
-+    defaultValue: "POST",
-     onChange: (e) => setData(__spreadProps(__spreadValues({}, data2), { reqType: e.target.value }))
-   }, /* @__PURE__ */ React.createElement("option", {
-     value: "GET"
+@@ -1103,6 +1101,10 @@ const InputForm = ({ data: data2, setData }) => {
    }, "GET"), /* @__PURE__ */ React.createElement("option", {
      value: "POST"
    }, "POST"), /* @__PURE__ */ React.createElement("option", {
