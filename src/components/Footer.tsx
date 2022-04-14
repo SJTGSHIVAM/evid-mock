@@ -5,8 +5,8 @@ import {
   FaMedium,
 } from 'react-icons/fa';
 
-export const Footer = () => (
-  <footer className={""}>
+export const Footer = ({ className }: { className?: string }) => (
+  <footer className={className}>
     <ul>
       <li className="">
         <a href="https://github.com/SJTGSHIVAM" target="blank">

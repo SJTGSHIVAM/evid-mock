@@ -16,10 +16,13 @@ import { ToastContainer } from 'react-toastify';
 
 export default function App() {
   return (
-    <>
-      <header className="">
+    <div className="text-dcol min-h-screen max-w-[100vw] grid grid-cols-[max-content_1fr] grid-rows-[max-content_1fr_max-content]">
+      <header className="col-span-2">
         <Navbar />{" "}
       </header>
+      <aside className="">
+        <Sidebar />
+      </aside>
       <main className="">
         <ToastContainer
           position="top-left"
@@ -33,13 +36,13 @@ export default function App() {
           pauseOnHover
           theme="dark"
         />
-        <Sidebar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/q" element={<Mockman />} />
         </Routes>
       </main>
-      <Footer />
-    </>
+
+      <Footer className="col-span-2" />
+    </div>
   );
 }
