@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { useVideoList } from 'hooks/context/videoContext';
 import {
   BsFillMoonStarsFill,
   BsSunFill,
@@ -7,13 +8,21 @@ import {
 import {
   Link,
   useLocation,
+  useNavigate,
 } from 'react-router-dom';
 import { toastError } from 'utils';
 
 export const Navbar = () => {
+  const { videoList, searchVideoList } = useVideoList();
   const [theme, setTheme] = useState("dark");
   const [searchVideo, setSearchVideo] = useState("");
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+  function handleSearchVideo(searchVideo: string) {
+    if (pathname !== "/") navigate("/");
+    searchVideoList(searchVideo);
+  }
+
   return (
     <nav className="bg-gacol p-4 text-wcol flex">
       <div className="mr-auto">
@@ -31,6 +40,7 @@ export const Navbar = () => {
           value={searchVideo}
           onChange={(e) => {
             setSearchVideo(e.currentTarget.value);
+            handleSearchVideo(searchVideo);
           }}
           placeholder="Search"
         />{" "}
