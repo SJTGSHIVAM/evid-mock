@@ -11,11 +11,10 @@ import { MdOutlineWatchLater } from 'react-icons/md';
 
 const Sidebar = () => {
   return (
-    <div className="bg-gacol  sticky top-0 h-full  max-h-screen w-max  shadow-lg">
-      <div className="sticky top-0 overflow-scroll">
+    <div className="bg-gacol  sticky top-0 h-full  max-h-screen w-max ">
+      <div className="sticky top-0 overflow-auto">
         <SidebarIcon text="Home" icon={<IoHome />} />
         <SidebarIcon text="Treanding" icon={<AiTwotoneFire />} />
-        <SidebarIcon text="History" icon={<AiOutlineHistory />} />
         <SidebarIcon text="Playlist" icon={<CgPlayList />} />
         <SidebarIcon text="Watch Later" icon={<MdOutlineWatchLater />} />
         <SidebarIcon text="Liked Videos" icon={<FcLike />} />

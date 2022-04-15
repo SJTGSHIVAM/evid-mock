@@ -9,7 +9,7 @@ import {
 } from 'utils';
 
 export const Navbar = () => (
-  <nav className="bg-gacol p-4">
+  <nav className="bg-gacol p-4 text-wcol">
     <button
       onClick={() => {
         document.body.classList.add("theme_light");

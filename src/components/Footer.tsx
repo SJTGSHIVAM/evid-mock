@@ -6,7 +6,9 @@ import {
 } from 'react-icons/fa';
 
 export const Footer = ({ className }: { className?: string }) => (
-  <footer className={`${className} grid place-content-center bg-pcol`}>
+  <footer
+    className={`${className} grid place-content-center bg-pcol text-bcol`}
+  >
     <ul className="flex justify-between p-2">
       <li className="">
         <a href="https://github.com/SJTGSHIVAM" target="blank">
