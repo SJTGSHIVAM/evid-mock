@@ -8,17 +8,30 @@ import { CgPlayList } from 'react-icons/cg';
 import { FcLike } from 'react-icons/fc';
 import { IoHome } from 'react-icons/io5';
 import { MdOutlineWatchLater } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
     <div className="bg-gacol  sticky top-0 h-full  max-h-screen w-max ">
       <div className="sticky top-0 overflow-auto">
-        <SidebarIcon text="Home" icon={<IoHome />} />
-        <SidebarIcon text="Treanding" icon={<AiTwotoneFire />} />
-        <SidebarIcon text="Playlist" icon={<CgPlayList />} />
-        <SidebarIcon text="Watch Later" icon={<MdOutlineWatchLater />} />
-        <SidebarIcon text="Liked Videos" icon={<FcLike />} />
-        <SidebarIcon text="Watch History" icon={<AiOutlineHistory />} />
+        <SidebarIcon to="/" text="Home" icon={<IoHome />} />
+        <SidebarIcon
+          to="/treanding"
+          text="Treanding"
+          icon={<AiTwotoneFire />}
+        />
+        <SidebarIcon to="playlists" text="Playlists" icon={<CgPlayList />} />
+        <SidebarIcon
+          to="watchlater"
+          text="Watch Later"
+          icon={<MdOutlineWatchLater />}
+        />
+        <SidebarIcon to="liked" text="Liked Videos" icon={<FcLike />} />
+        <SidebarIcon
+          to="history"
+          text="Watch History"
+          icon={<AiOutlineHistory />}
+        />
       </div>
     </div>
   );
@@ -26,17 +39,21 @@ const Sidebar = () => {
 
 const SidebarIcon = ({
   icon,
+  to,
   text = "tooltip 💡",
 }: {
   icon: React.ReactChild;
+  to: string;
   text?: string;
 }) => (
-  <div className="sidebar-icon group m-2">
-    <span className="text-pcol text-xl">{icon}</span>
-    <span className="sidebar-tooltip bg-lcol hidden border border-dcol m-2 p-1 group-hover:block group-hover:fixed">
-      {text}
-    </span>
-  </div>
+  <Link to={to}>
+    <div className="sidebar-icon cursor-pointer group m-2">
+      <span className="text-pcol text-xl">{icon}</span>
+      <span className="sidebar-tooltip bg-lcol hidden border border-dcol m-2 p-1 group-hover:block group-hover:fixed">
+        {text}
+      </span>
+    </div>
+  </Link>
 );
 
 export { Sidebar };

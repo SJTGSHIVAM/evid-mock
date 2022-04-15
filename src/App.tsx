@@ -7,7 +7,15 @@ import {
 } from 'components';
 // @ts-ignore
 import Mockman from 'mockman-js';
-import { Home } from 'pages';
+import {
+  History,
+  Home,
+  Liked,
+  Login,
+  Playlists,
+  Treanding,
+  WatchLater,
+} from 'pages';
 import {
   Route,
   Routes,
@@ -38,6 +46,12 @@ export default function App() {
         />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="treanding" element={<Treanding />} />
+          <Route path="liked" element={<Liked />} />
+          <Route path="history" element={<History />} />
+          <Route path="watchlater" element={<WatchLater />} />
+          <Route path="playlists" element={<Playlists />} />
           <Route path="/q" element={<Mockman />} />
         </Routes>
       </main>
