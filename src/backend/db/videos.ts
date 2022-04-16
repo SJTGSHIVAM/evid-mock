@@ -27,7 +27,7 @@ export const videos = [
 
   {
     id: "48uzKhtyEvI",
-    tags: ["why Linked list", "data structures"],
+    tags: ["why Linked list", "trending", "data structures"],
     img: "https://i.ytimg.com/vi/48uzKhtyEvI/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLA1z2sPgxTzXgNQU0knp1M5xxtD_w",
     title: "What is wrong with Array? | Why LinkedList?",
     creator: "Telusko",
@@ -93,7 +93,7 @@ export const videos = [
   // 4
   {
     id: "qH6yxkw0u78",
-    tags: ["Trees", "data structures"],
+    tags: ["Trees", "trending", "data structures"],
     img: "https://i.ytimg.com/vi/qH6yxkw0u78/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBrwKsLY5JtXR8TQpt5nituFNcEJQ",
     title: "Data structures: Introduction to Trees",
     creator: "mycodeschool",
@@ -166,7 +166,7 @@ In computer science, a trie, also called digital tree and sometimes radix tree o
 
   {
     id: "lhToWeuWWfw",
-    tags: ["Operating Systems", "system calls"],
+    tags: ["Operating Systems", "trending", "system calls"],
     img: "https://i.ytimg.com/an_webp/lhToWeuWWfw/mqdefault_6s.webp?du=3000&sqp=CMjb15IG&rs=AOn4CLCNdEPEb2lPMRy5w5i5jF2kqwX_Xw",
     title: "System Calls",
     creator: "Neso Academy",
@@ -276,7 +276,7 @@ In computer science, a trie, also called digital tree and sometimes radix tree o
   // 10
   {
     id: "pJ6qrCB8pDw",
-    tags: ["Operating Systems", "Paging", "Memory Management"],
+    tags: ["Operating Systems", "Paging", "trending", "Memory Management"],
     img: "https://i.ytimg.com/vi/pJ6qrCB8pDw/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDiSkpxrpzFsblq9bVqP3zwsxdCCA",
     title:
       "Paging in Operating Systems with Example & Working - Memory Management",
