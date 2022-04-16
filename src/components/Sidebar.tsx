@@ -15,20 +15,20 @@ const Sidebar = () => {
     <div className="bg-gacol  sticky top-0 h-full  max-h-screen w-max ">
       <div className="sticky top-0 overflow-auto">
         <SidebarIcon to="/" text="Home" icon={<IoHome />} />
+        <SidebarIcon to="treanding" text="Treanding" icon={<AiTwotoneFire />} />
         <SidebarIcon
-          to="/treanding"
-          text="Treanding"
-          icon={<AiTwotoneFire />}
+          to="user/playlists"
+          text="Playlists"
+          icon={<CgPlayList />}
         />
-        <SidebarIcon to="playlists" text="Playlists" icon={<CgPlayList />} />
         <SidebarIcon
-          to="watchlater"
+          to="user/watchlater"
           text="Watch Later"
           icon={<MdOutlineWatchLater />}
         />
-        <SidebarIcon to="liked" text="Liked Videos" icon={<FcLike />} />
+        <SidebarIcon to="user/liked" text="Liked Videos" icon={<FcLike />} />
         <SidebarIcon
-          to="history"
+          to="user/history"
           text="Watch History"
           icon={<AiOutlineHistory />}
         />
@@ -48,7 +48,7 @@ const SidebarIcon = ({
 }) => (
   <Link to={to}>
     <div className="sidebar-icon cursor-pointer group m-2">
-      <span className="text-pcol text-xl">{icon}</span>
+      <span className="text-pcol text-xl xs:text-4xl">{icon}</span>
       <span className="sidebar-tooltip bg-lcol hidden border border-dcol m-2 p-1 group-hover:block group-hover:fixed">
         {text}
       </span>

@@ -29,7 +29,7 @@ export const Navbar = () => {
       <div className="mr-auto">
         {" "}
         {isAuth() && (
-          <Link to="profile">
+          <Link to="user/profile">
             <div className="rounded-full bg-lcol cursor-pointer text-dcol w-[2.7ex] text-center font-bold ">
               {loginUser.fname[0].toUpperCase()}
             </div>
@@ -67,7 +67,7 @@ export const Navbar = () => {
             Logout
           </button>
         ) : (
-          <Link to="login"> Login</Link>
+          <Link to="user/login"> Login</Link>
         )}
       </div>
     </nav>

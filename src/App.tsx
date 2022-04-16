@@ -5,6 +5,8 @@ import {
   Navbar,
   Sidebar,
 } from 'components';
+import { LoggedOutRoute } from 'components/LoggedOutRoute';
+import { ProtectedRoute } from 'components/ProtectedRoute';
 // @ts-ignore
 import Mockman from 'mockman-js';
 import {
@@ -46,12 +48,17 @@ export default function App() {
         />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="user" element={<LoggedOutRoute />}>
+            <Route path="login" element={<Login />} />
+          </Route>
           <Route path="treanding" element={<Treanding />} />
-          <Route path="liked" element={<Liked />} />
-          <Route path="history" element={<History />} />
-          <Route path="watchlater" element={<WatchLater />} />
-          <Route path="playlists" element={<Playlists />} />
+          <Route path="user" element={<ProtectedRoute />}>
+            <Route path="liked" element={<Liked />} />
+            <Route path="history" element={<History />} />
+            <Route path="watchlater" element={<WatchLater />} />
+            <Route path="playlists" element={<Playlists />} />
+          </Route>
+
           <Route path="/q" element={<Mockman />} />
         </Routes>
       </main>
