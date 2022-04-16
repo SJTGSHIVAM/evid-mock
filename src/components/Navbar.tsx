@@ -69,7 +69,6 @@ export const Navbar = () => {
         ) : (
           <Link to="login"> Login</Link>
         )}
-        {/* <FcLikePlaceholder /> */}
       </div>
     </nav>
   );
