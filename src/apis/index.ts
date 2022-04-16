@@ -47,24 +47,27 @@ const userSignup = async ({
   });
 
 const getHistory = async (encodedToken: string) =>
-  axios.get<Array<Video>>(`${BASE_API_URL}/user/history`, {
+  axios.get<{ history: Array<Video> }>(`${BASE_API_URL}/user/history`, {
     headers: { authorization: encodedToken },
   });
 
 const addHistory = async (video: Video, encodedToken: string) =>
-  axios.post<Array<Video>>(
+  axios.post<{ history: Array<Video> }>(
     `${BASE_API_URL}/user/history`,
     { video },
     { headers: { authorization: encodedToken } }
   );
 
 const removeHistory = async (id: string, encodedToken: string) =>
-  axios.delete<Array<Video>>(`${BASE_API_URL}/user/history/` + id, {
-    headers: { authorization: encodedToken },
-  });
+  axios.delete<{ history: Array<Video> }>(
+    `${BASE_API_URL}/user/history/` + id,
+    {
+      headers: { authorization: encodedToken },
+    }
+  );
 
 const deleteAllHistory = async () =>
-  axios.delete<Array<Video>>(`${BASE_API_URL}/user/history/all`);
+  axios.delete<{ history: Array<Video> }>(`${BASE_API_URL}/user/history/all`);
 
 const addLike = async (video: Video, encodedToken: string) =>
   axios.post<Array<Video>>(

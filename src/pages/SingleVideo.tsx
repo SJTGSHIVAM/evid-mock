@@ -3,6 +3,8 @@ import {
   useState,
 } from 'react';
 
+import { useLogin } from 'hooks/context/user/userContext';
+import { addHistoryModule } from 'hooks/context/user/userContextModule';
 import { useVideoList } from 'hooks/context/videoContext';
 import { Video } from 'interfaces';
 import { CgPlayList } from 'react-icons/cg';
@@ -15,10 +17,17 @@ export const SingleVideo = () => {
   const { videoList } = useVideoList();
   const [currentVideo, setCurrentVideo] = useState<Video>();
   const { videoId } = useParams();
+  const { loginUser, userDispatch, isAuth } = useLogin();
+
   useEffect(() => {
     const foundVideo = videoList.find((video) => video.id === videoId);
-    if (foundVideo) setCurrentVideo({ ...foundVideo });
+    if (foundVideo) {
+      setCurrentVideo({ ...foundVideo });
+      if (isAuth())
+        addHistoryModule(userDispatch, loginUser.encodedToken, foundVideo);
+    }
   }, [videoList]);
+
   return (
     <>
       {videoList.length > 0 ? (
