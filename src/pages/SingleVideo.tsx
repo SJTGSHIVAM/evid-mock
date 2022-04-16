@@ -24,7 +24,7 @@ export const SingleVideo = () => {
       {videoList.length > 0 ? (
         currentVideo && (
           <div className="w-full h-full grid">
-            <div className="flex flex-col w-[95%] p-2">
+            <div className="flex flex-col w-[95%] mx-auto p-2">
               <iframe
                 className="w-full sm:h-3/5 md:h-4/5"
                 src={`https://www.youtube.com/embed/${currentVideo.id}`}
