@@ -28,11 +28,13 @@ export const Navbar = () => {
     <nav className="bg-gacol p-4 text-wcol flex">
       <div className="mr-auto">
         {" "}
-        <Link to="profile">
-          <div className="rounded-full bg-lcol cursor-pointer text-dcol w-[2.7ex] text-center font-bold ">
-            S
-          </div>
-        </Link>
+        {isAuth() && (
+          <Link to="profile">
+            <div className="rounded-full bg-lcol cursor-pointer text-dcol w-[2.7ex] text-center font-bold ">
+              {loginUser.fname[0].toUpperCase()}
+            </div>
+          </Link>
+        )}
       </div>
       <div className="mx-auto flex justify-center">
         <input
