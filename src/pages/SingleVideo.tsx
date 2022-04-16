@@ -1,24 +1,38 @@
 import {
+  useCallback,
   useEffect,
   useState,
 } from 'react';
 
 import { useLogin } from 'hooks/context/user/userContext';
-import { addHistoryModule } from 'hooks/context/user/userContextModule';
+import {
+  addHistoryModule,
+  addLikedVideoModule,
+  delLikedVideoModule,
+} from 'hooks/context/user/userContextModule';
 import { useVideoList } from 'hooks/context/videoContext';
-import { Video } from 'interfaces';
+import {
+  UserLoginData,
+  Video,
+} from 'interfaces';
+import throttle from 'lodash.throttle';
 import { CgPlayList } from 'react-icons/cg';
-import { FcLikePlaceholder } from 'react-icons/fc';
+import {
+  FcLike,
+  FcLikePlaceholder,
+} from 'react-icons/fc';
 import { IoIosEye } from 'react-icons/io';
 import { MdOutlineWatchLater } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
+import { UseUserReducerDispatch } from 'types';
 
 export const SingleVideo = () => {
   const { videoList } = useVideoList();
   const [currentVideo, setCurrentVideo] = useState<Video>();
   const { videoId } = useParams();
   const { loginUser, userDispatch, isAuth } = useLogin();
-
+  const isVideoLiked = (loginUser: UserLoginData, videoId: string) =>
+    loginUser.likes.some((video: Video) => video.id === videoId);
   useEffect(() => {
     const foundVideo = videoList.find((video) => video.id === videoId);
     if (foundVideo) {
@@ -28,10 +42,22 @@ export const SingleVideo = () => {
     }
   }, [videoList]);
 
+  function handleLikeRaw(
+    liked: boolean,
+    userDispatch: UseUserReducerDispatch,
+    encodedToken: string,
+    video: Video
+  ) {
+    if (liked) delLikedVideoModule(userDispatch, encodedToken, video.id);
+    else addLikedVideoModule(userDispatch, encodedToken, video);
+  }
+  const handleLike = useCallback(throttle(handleLikeRaw, 1000), []);
+
   return (
     <>
       {videoList.length > 0 ? (
-        currentVideo && (
+        currentVideo &&
+        videoId && (
           <div className="w-full h-full grid">
             <div className="flex flex-col w-[95%] mx-auto p-2">
               <iframe
@@ -53,9 +79,23 @@ export const SingleVideo = () => {
                   , {currentVideo.uploadedOn}
                 </div>
                 <div className="flex flex-row gap-4 ml-auto mt-2">
-                  <button className="flex flex-row gap-2 border-2 border-gacol p-1 sm:px-2 rounded-xl hover:scale-105 ease-in-out hover:bg-pcol">
+                  <button
+                    className="flex flex-row gap-2 border-2 border-gacol p-1 sm:px-2 rounded-xl hover:scale-105 ease-in-out hover:bg-pcol"
+                    onClick={() =>
+                      handleLike(
+                        isVideoLiked(loginUser, videoId),
+                        userDispatch,
+                        loginUser.encodedToken,
+                        currentVideo
+                      )
+                    }
+                  >
                     <div className="self-center">
-                      <FcLikePlaceholder />
+                      {isVideoLiked(loginUser, videoId) ? (
+                        <FcLike />
+                      ) : (
+                        <FcLikePlaceholder />
+                      )}
                     </div>
                     <p className="hidden sm:inline  self-center">
                       {" "}
