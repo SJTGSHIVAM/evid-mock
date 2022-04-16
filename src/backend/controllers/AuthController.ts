@@ -56,7 +56,41 @@ export const signupHandler = function (schema, request) {
       { username: newUser.username },
       process.env.REACT_APP_JWT_SECRET
     );
-    return new Response(201, {}, { ...createdUser, encodedToken });
+    user.password = undefined;
+    const {
+      fname,
+      lname,
+      username,
+      dob,
+      contact,
+      email,
+      likes,
+      watchLater,
+      history,
+      playlists,
+      createdAt,
+      updatedAt,
+    } = createdUser;
+    return new Response(
+      201,
+      {},
+      {
+        id,
+        fname,
+        lname,
+        username,
+        dob,
+        contact,
+        email,
+        likes,
+        watchLater,
+        history,
+        playlists,
+        createdAt,
+        updatedAt,
+        encodedToken,
+      }
+    );
   } catch (error) {
     return new Response(
       500,
