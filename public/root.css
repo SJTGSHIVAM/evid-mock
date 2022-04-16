@@ -3,15 +3,15 @@
   --primary-light-col: #38bdf8;
   --secondary-col: #f472b6;
   --secondary-light-col: #d76287;
-  --dark-col: #f8fafc;
-  --gray-col: #2d4358;
+  --dark-col: #f5fbb0;
+  --gray-col: hsl(209, 32%, 26%);
   --light-col: #1e293b;
   --red-col: #e32f56;
   --red-light-col: #fdb2bb;
   --green-col: #177a73;
   --green-light-col: #a8f3e8;
   --black-col: #1e293b;
-  --white-col: #f8fafc;
+  --white-col: #f5fbb0;
 }
 body {
   background: var(--light-col);
@@ -23,11 +23,18 @@ body {
   --secondary-light-col: #f472b6;
   --dark-col: #1e293b;
   --gray-col: #2d4358;
-  --light-col: #f8fafc;
+  --light-col: #f5fbb0;
   --red-col: #e32f56;
   --red-light-col: #fdb2bb;
   --green-col: #177a73;
   --green-light-col: #a8f3e8;
   --black-col: #1e293b;
-  --white-col: #f8fafc;
+  --white-col: #f5fbb0;
+}
+
+.toastify-theme {
+  --toastify-color-light: var(--light-col);
+  --toastify-color-dark: var(--dark-col);
+  --toastify-text-color-light: var(--gray-col);
+  --toastify-text-color-dark: var(--light-col);
 }

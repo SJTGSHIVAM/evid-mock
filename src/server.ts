@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import { getUserHandler } from 'backend/controllers/UserController';
 import {
   Model,
   RestSerializer,
@@ -78,7 +79,7 @@ export function makeServer({ environment = "development" } = {}) {
       // auth routes (public)
       this.post("/user/signup", signupHandler.bind(this));
       this.post("/user/login", loginHandler.bind(this));
-
+      this.get("/user", getUserHandler.bind(this));
       // video routes (public)
       this.get("/videos", getAllVideosHandler.bind(this));
       this.get("video/:videoId", getVideoHandler.bind(this));

@@ -4,19 +4,55 @@ import {
   addPlaylist,
   addPlaylistVideo,
   addWatchLater,
+  getUser,
   removeHistory,
   removeLike,
   removePlaylist,
   removePlaylistVideo,
   removeWatchLater,
+  userLogin,
 } from 'apis';
 import { UserActionType } from 'hooks/reducer/user/action-types';
 import {
   Playlist,
+  UserLoginInputData,
   Video,
 } from 'interfaces';
 import { UseUserReducerDispatch } from 'types';
 import { toastError } from 'utils';
+
+export const tokenUserLoginModule = async (
+  dispatch: UseUserReducerDispatch,
+  token: string
+) => {
+  try {
+    const payload = await getUser(token);
+    dispatch({ type: UserActionType.LOGIN, payload });
+    localStorage.setItem("token", payload.encodedToken);
+  } catch (error) {
+    toastError();
+  }
+};
+
+export const userLoginModule = async (
+  dispatch: UseUserReducerDispatch,
+  loginInput: UserLoginInputData
+): Promise<boolean> => {
+  try {
+    const payload = await userLogin(loginInput);
+    dispatch({ type: UserActionType.LOGIN, payload });
+    localStorage.setItem("token", payload.encodedToken);
+    return true;
+  } catch (error) {
+    toastError("Authentication Error. Please provide correct credentials");
+    return false;
+  }
+};
+
+export const userLogoutModule = async (dispatch: UseUserReducerDispatch) => {
+  dispatch({ type: UserActionType.LOGOUT });
+  localStorage.removeItem("token");
+};
 
 export const addHistoryModule = async (
   dispatch: UseUserReducerDispatch,

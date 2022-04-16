@@ -53,7 +53,7 @@ export const signupHandler = function (schema, request) {
     };
     const createdUser = schema.users.create(newUser);
     const encodedToken = sign(
-      { id, username },
+      { username: newUser.username },
       process.env.REACT_APP_JWT_SECRET
     );
     return new Response(201, {}, { ...createdUser, encodedToken });
@@ -90,9 +90,10 @@ export const loginHandler = function (schema, request) {
     }
     if (password === user.password) {
       const encodedToken = sign(
-        { id: user.id, username },
+        { username: user.username },
         process.env.REACT_APP_JWT_SECRET
       );
+
       user.password = undefined;
       const {
         id,

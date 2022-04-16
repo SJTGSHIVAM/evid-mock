@@ -1,11 +1,14 @@
 import {
   createContext,
   useContext,
+  useEffect,
 } from 'react';
 
 import { useUserReducer } from 'hooks/reducer/user/reducer';
 import { UserLoginData } from 'interfaces';
 import { UseUserReducerDispatch } from 'types';
+
+import { tokenUserLoginModule } from './userContextModule';
 
 const initialUser: UserLoginData = {
   id: "",
@@ -43,6 +46,10 @@ export const UserProvider = ({
   const isAuth = () => {
     return !(user.username === "" || user.username === undefined);
   };
+  useEffect(() => {
+    const savedToken = localStorage.getItem("token");
+    if (savedToken) tokenUserLoginModule(userDispatch, savedToken);
+  }, []);
   return (
     <UserContext.Provider value={{ loginUser: user, userDispatch, isAuth }}>
       {children}

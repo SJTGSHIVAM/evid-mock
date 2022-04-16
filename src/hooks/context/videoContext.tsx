@@ -1,5 +1,6 @@
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -7,6 +8,7 @@ import {
 
 import { getVideos } from 'apis';
 import { Video } from 'interfaces';
+import debounce from 'lodash.debounce';
 import { toastError } from 'utils';
 
 const VideoContext = createContext<{
@@ -24,32 +26,42 @@ export function VideoProvider({
 }: {
   children: JSX.Element[] | JSX.Element;
 }) {
+  const [globalVideoList, setGlobalVideoList] = useState<Array<Video>>([]);
   const [videoList, setVideoList] = useState<Array<Video>>([]);
 
-  const getInitialVideoList = async () => {
+  const getInitialVideoList = async (): Promise<Array<Video>> => {
     try {
-      const response = await getVideos();
-      return response.data;
+      return await getVideos();
     } catch (err) {
       toastError("Some error in fetching videos");
       return [];
     }
   };
-  const searchVideoList = (searchTerm: string) => {
-    searchTerm = searchTerm.trim();
+  const searchVideoListRaw = (videoList: Array<Video>, searchTerm: string) => {
+    searchTerm = searchTerm.toLowerCase().trim();
+
     const searchedVideos = videoList.filter(
       (video) =>
-        video.about.includes(searchTerm) ||
-        video.creator.includes(searchTerm) ||
+        video.about.toLowerCase().includes(searchTerm) ||
+        video.creator.toLowerCase().includes(searchTerm) ||
         video.tags.includes(searchTerm) ||
-        video.title.includes(searchTerm)
+        video.title.toLowerCase().includes(searchTerm) ||
+        searchTerm === ""
     );
     setVideoList(searchedVideos);
   };
+  const searchVideoListNoCurry = useCallback(
+    debounce(searchVideoListRaw, 350),
+    []
+  );
+
+  const searchVideoList = (searchTerm: string) =>
+    searchVideoListNoCurry(globalVideoList, searchTerm);
 
   useEffect(() => {
     (async () => {
       const initialVideoList = await getInitialVideoList();
+      setGlobalVideoList(initialVideoList);
       setVideoList(initialVideoList);
     })();
   }, []);
