@@ -141,13 +141,13 @@ export const delLikedVideoModule = async (
 export const delPlaylistModule = async (
   dispatch: UseUserReducerDispatch,
   token: string,
-  payload: string
+  payload: Playlist
 ) => {
-  dispatch({ type: UserActionType.DEL_PLAYLIST, payload });
+  dispatch({ type: UserActionType.DEL_PLAYLIST, payload: payload.id });
   try {
-    await removePlaylist(payload, token);
+    await removePlaylist(payload.id, token);
   } catch (error) {
-    dispatch({ type: UserActionType.DEL_PLAYLIST, payload });
+    dispatch({ type: UserActionType.ADD_PLAYLIST, payload });
     toastError();
   }
 };
@@ -161,7 +161,7 @@ export const addPlaylistModule = async (
   try {
     await addPlaylist(payload, token);
   } catch (error) {
-    dispatch({ type: UserActionType.ADD_PLAYLIST, payload });
+    dispatch({ type: UserActionType.DEL_PLAYLIST, payload: payload.id });
     toastError();
   }
 };
@@ -175,7 +175,10 @@ export const addlPlaylistVideoModule = async (
   try {
     await addPlaylistVideo(payload, token);
   } catch (error) {
-    dispatch({ type: UserActionType.ADD_PLAYLIST_VIDEO, payload });
+    dispatch({
+      type: UserActionType.DEL_PLAYLIST_VIDEO,
+      payload: { videoId: payload.video.id, playlistId: payload.playlistId },
+    });
     toastError();
   }
 };
@@ -183,13 +186,19 @@ export const addlPlaylistVideoModule = async (
 export const delPlaylistVideoModule = async (
   dispatch: UseUserReducerDispatch,
   token: string,
-  payload: { videoId: string; playlistId: string }
+  payload: { video: Video; playlistId: string }
 ) => {
-  dispatch({ type: UserActionType.DEL_PLAYLIST_VIDEO, payload });
+  dispatch({
+    type: UserActionType.DEL_PLAYLIST_VIDEO,
+    payload: { videoId: payload.video.id, playlistId: payload.playlistId },
+  });
   try {
-    await removePlaylistVideo(payload, token);
+    await removePlaylistVideo(
+      { videoId: payload.video.id, playlistId: payload.playlistId },
+      token
+    );
   } catch (error) {
-    dispatch({ type: UserActionType.DEL_PLAYLIST_VIDEO, payload });
+    dispatch({ type: UserActionType.ADD_PLAYLIST_VIDEO, payload });
     toastError();
   }
 };
