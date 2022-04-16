@@ -80,7 +80,7 @@ const removeLike = async (id: string, encodedToken: string) =>
 
 const addWatchLater = async (video: Video, encodedToken: string) =>
   axios.post<Array<Video>>(
-    `${BASE_API_URL}/user/watchlater/`,
+    `${BASE_API_URL}/user//`,
     { video },
     { headers: { authorization: encodedToken } }
   );

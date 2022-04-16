@@ -49,7 +49,7 @@ export const signupHandler = function (schema, request) {
       likes: [],
       history: [],
       playlists: [],
-      watchlater: [],
+      watchLater: [],
     };
     const createdUser = schema.users.create(newUser);
     const encodedToken = sign(
@@ -104,7 +104,7 @@ export const loginHandler = function (schema, request) {
         contact,
         email,
         likes,
-        watchlater,
+        watchLater,
         history,
         playlists,
         createdAt,
@@ -122,7 +122,7 @@ export const loginHandler = function (schema, request) {
           contact,
           email,
           likes,
-          watchlater,
+          watchLater,
           history,
           playlists,
           createdAt,
