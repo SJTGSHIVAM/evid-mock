@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { useLogin } from 'hooks/context/user/userContext';
+import { userLogoutModule } from 'hooks/context/user/userContextModule';
 import { useVideoList } from 'hooks/context/videoContext';
 import {
   BsFillMoonStarsFill,
@@ -10,10 +12,9 @@ import {
   useLocation,
   useNavigate,
 } from 'react-router-dom';
-import { toastError } from 'utils';
 
 export const Navbar = () => {
-  const { videoList, searchVideoList } = useVideoList();
+  const { searchVideoList } = useVideoList();
   const [theme, setTheme] = useState("dark");
   const [searchVideo, setSearchVideo] = useState("");
   const { pathname } = useLocation();
@@ -22,7 +23,7 @@ export const Navbar = () => {
     if (pathname !== "/") navigate("/");
     searchVideoList(searchVideo);
   }
-
+  const { loginUser, userDispatch, isAuth } = useLogin();
   return (
     <nav className="bg-gacol p-4 text-wcol flex">
       <div className="mr-auto">
@@ -55,17 +56,16 @@ export const Navbar = () => {
           {theme === "dark" ? <BsSunFill /> : <BsFillMoonStarsFill />}
         </button>
 
-        {pathname !== "/login" && (
-          <Link to="login">
-            {" "}
-            <button
-              onClick={() => {
-                toastError();
-              }}
-            >
-              Login
-            </button>
-          </Link>
+        {pathname !== "/login" && isAuth() ? (
+          <button
+            onClick={() => {
+              userLogoutModule(userDispatch);
+            }}
+          >
+            Logout
+          </button>
+        ) : (
+          <Link to="login"> Login</Link>
         )}
         {/* <FcLikePlaceholder /> */}
       </div>

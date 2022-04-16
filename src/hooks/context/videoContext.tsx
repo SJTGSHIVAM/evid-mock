@@ -31,8 +31,7 @@ export function VideoProvider({
 
   const getInitialVideoList = async (): Promise<Array<Video>> => {
     try {
-      const response = await getVideos();
-      return response.data.videos;
+      return await getVideos();
     } catch (err) {
       toastError("Some error in fetching videos");
       return [];

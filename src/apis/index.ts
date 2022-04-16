@@ -9,13 +9,23 @@ import {
 } from 'interfaces';
 
 const getVideos = async () =>
-  axios.get<{ videos: Array<Video> }>(`${BASE_API_URL}/videos`);
+  axios
+    .get<{ videos: Array<Video> }>(`${BASE_API_URL}/videos`)
+    .then((res) => res.data.videos);
 
 const userLogin = async ({ username, password }: UserLoginInputData) =>
-  axios.post<UserLoginData>(`${BASE_API_URL}/user/login`, {
-    username,
-    password,
-  });
+  axios
+    .post<UserLoginData>(`${BASE_API_URL}/user/login`, {
+      username,
+      password,
+    })
+    .then((res) => res.data);
+const getUser = async (encodedToken: string) =>
+  axios
+    .get<UserLoginData>(`${BASE_API_URL}/user`, {
+      headers: { authorization: encodedToken },
+    })
+    .then((res) => res.data);
 
 const userSignup = async ({
   fname,
@@ -136,6 +146,7 @@ export {
   getHistory,
   getPlaylists,
   getPlaylistVideos,
+  getUser,
   getVideos,
   removeHistory,
   removeLike,
