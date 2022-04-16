@@ -15,7 +15,7 @@ import {
   Liked,
   Login,
   Playlists,
-  Treanding,
+  Trending,
   WatchLater,
 } from 'pages';
 import {
@@ -51,7 +51,7 @@ export default function App() {
           <Route path="user" element={<LoggedOutRoute />}>
             <Route path="login" element={<Login />} />
           </Route>
-          <Route path="treanding" element={<Treanding />} />
+          <Route path="trending" element={<Trending />} />
           <Route path="user" element={<ProtectedRoute />}>
             <Route path="liked" element={<Liked />} />
             <Route path="history" element={<History />} />
