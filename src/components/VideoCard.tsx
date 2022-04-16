@@ -30,7 +30,7 @@ export const VideoCard = ({ video }: { video: Video }) => {
     encodedToken: string,
     video: Video
   ) {
-    if (liked) delLikedVideoModule(userDispatch, encodedToken, video.id);
+    if (liked) delLikedVideoModule(userDispatch, encodedToken, video);
     else addLikedVideoModule(userDispatch, encodedToken, video);
   }
   const handleLike = useCallback(throttle(handleLikeRaw, 1000), []);

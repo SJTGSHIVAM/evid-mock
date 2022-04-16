@@ -8,7 +8,9 @@ import { useLogin } from 'hooks/context/user/userContext';
 import {
   addHistoryModule,
   addLikedVideoModule,
+  addWatchLaterModule,
   delLikedVideoModule,
+  delWatchLaterModule,
 } from 'hooks/context/user/userContextModule';
 import { useVideoList } from 'hooks/context/videoContext';
 import {
@@ -22,7 +24,10 @@ import {
   FcLikePlaceholder,
 } from 'react-icons/fc';
 import { IoIosEye } from 'react-icons/io';
-import { MdOutlineWatchLater } from 'react-icons/md';
+import {
+  MdOutlineWatchLater,
+  MdWatchLater,
+} from 'react-icons/md';
 import { useParams } from 'react-router-dom';
 import { UseUserReducerDispatch } from 'types';
 
@@ -33,6 +38,8 @@ export const SingleVideo = () => {
   const { loginUser, userDispatch, isAuth } = useLogin();
   const isVideoLiked = (loginUser: UserLoginData, videoId: string) =>
     loginUser.likes.some((video: Video) => video.id === videoId);
+  const isinWatchLater = (loginUser: UserLoginData, videoId: string) =>
+    loginUser.watchLater.some((video: Video) => video.id === videoId);
   useEffect(() => {
     const foundVideo = videoList.find((video) => video.id === videoId);
     if (foundVideo) {
@@ -48,10 +55,21 @@ export const SingleVideo = () => {
     encodedToken: string,
     video: Video
   ) {
-    if (liked) delLikedVideoModule(userDispatch, encodedToken, video.id);
+    if (liked) delLikedVideoModule(userDispatch, encodedToken, video);
     else addLikedVideoModule(userDispatch, encodedToken, video);
   }
   const handleLike = useCallback(throttle(handleLikeRaw, 1000), []);
+
+  function handleWatchLaterRaw(
+    watchLater: boolean,
+    userDispatch: UseUserReducerDispatch,
+    encodedToken: string,
+    video: Video
+  ) {
+    if (watchLater) delWatchLaterModule(userDispatch, encodedToken, video);
+    else addWatchLaterModule(userDispatch, encodedToken, video);
+  }
+  const handleWatchLater = useCallback(throttle(handleWatchLaterRaw, 1000), []);
 
   return (
     <>
@@ -102,9 +120,23 @@ export const SingleVideo = () => {
                       {currentVideo.likes}
                     </p>
                   </button>
-                  <button className="flex flex-row gap-2 border-2 border-gacol sm:px-2 rounded-xl hover:scale-105 ease-in-out hover:bg-pcol">
+                  <button
+                    className="flex flex-row gap-2 border-2 border-gacol sm:px-2 rounded-xl hover:scale-105 ease-in-out hover:bg-pcol"
+                    onClick={() =>
+                      handleWatchLater(
+                        isinWatchLater(loginUser, videoId),
+                        userDispatch,
+                        loginUser.encodedToken,
+                        currentVideo
+                      )
+                    }
+                  >
                     <div className="self-center">
-                      <MdOutlineWatchLater />
+                      {isinWatchLater(loginUser, videoId) ? (
+                        <MdWatchLater />
+                      ) : (
+                        <MdOutlineWatchLater />
+                      )}
                     </div>
                     <p className="hidden sm:inline  self-center">
                       {" "}
