@@ -15,6 +15,7 @@ import {
   Liked,
   Login,
   Playlists,
+  SingleVideo,
   Trending,
   WatchLater,
 } from 'pages';
@@ -48,6 +49,7 @@ export default function App() {
         />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/video/:videoId" element={<SingleVideo />} />
           <Route path="user" element={<LoggedOutRoute />}>
             <Route path="login" element={<Login />} />
           </Route>
