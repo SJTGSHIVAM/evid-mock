@@ -152,7 +152,7 @@ const addPlaylistVideo = async (
 ) =>
   axios
     .post<{ playlist: Playlist }>(
-      `${BASE_API_URL}/user/playlists/` + playlistId,
+      `${BASE_API_URL}/user/playlists/${playlistId}`,
       { video },
       {
         headers: { authorization: encodedToken },

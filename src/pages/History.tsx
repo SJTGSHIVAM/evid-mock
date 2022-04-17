@@ -41,6 +41,7 @@ export const History = () => {
   }, []);
   return (
     <div>
+      <h1 className=" text-xl px-3 font-bold">History</h1>
       <VideoContainer>
         {loginUser.history &&
           loginUser.history.length > 0 &&

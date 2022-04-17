@@ -15,14 +15,17 @@ import {
 } from 'interfaces';
 import throttle from 'lodash.throttle';
 import { UseUserReducerDispatch } from 'types';
+import { toastSuccess } from 'utils';
 import { v4 as uuid } from 'uuid';
 
 export const AddPlaylistPopup = ({
   setIsAddPlaylistPopupVisible,
   video,
+  isUlNeeded = true,
 }: {
   setIsAddPlaylistPopupVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  video: Video;
+  video?: Video;
+  isUlNeeded?: boolean;
 }) => {
   const [playlistName, setPlaylistName] = useState("");
   const { loginUser, isAuth, userDispatch } = useLogin();
@@ -38,11 +41,12 @@ export const AddPlaylistPopup = ({
   ) {
     if (VideoInPlaylist)
       delPlaylistVideoModule(userDispatch, encodedToken, { video, playlistId });
-    else
+    else {
       addlPlaylistVideoModule(userDispatch, encodedToken, {
         video,
         playlistId,
       });
+    }
   }
   const handleVideoToPlaylist = useCallback(
     throttle(handleVideoToPlaylistRaw, 1000),
@@ -51,14 +55,24 @@ export const AddPlaylistPopup = ({
   function handleAddNewPlaylistRaw(
     userDispatch: UseUserReducerDispatch,
     encodedToken: string,
-    video: Video,
+    video: Video | undefined,
     name: string
   ) {
-    addPlaylistModule(userDispatch, encodedToken, {
-      id: uuid(),
-      name,
-      videoList: [video],
-    });
+    if (video)
+      addPlaylistModule(userDispatch, encodedToken, {
+        id: uuid(),
+        name,
+        videoList: [video],
+      });
+    else {
+      addPlaylistModule(userDispatch, encodedToken, {
+        id: uuid(),
+        name,
+        videoList: [],
+      });
+      toastSuccess("Added");
+      setIsAddPlaylistPopupVisible(false);
+    }
   }
   const handleAddNewPlaylist = useCallback(
     throttle(handleAddNewPlaylistRaw, 1000),
@@ -95,27 +109,29 @@ export const AddPlaylistPopup = ({
             Add
           </button>
         </div>
-        <div className="inline-flex flex-col max-h-60 items-start m-auto overflow-y-auto">
-          {loginUser.playlists.map((playlist) => (
-            <label>
-              <input
-                type="checkbox"
-                className="accent-plcol mr-1"
-                checked={isInPlaylist(playlist, video.id)}
-                onClick={() => {
-                  handleVideoToPlaylist(
-                    isInPlaylist(playlist, video.id),
-                    userDispatch,
-                    loginUser.encodedToken,
-                    video,
-                    playlist.id
-                  );
-                }}
-              />
-              {playlist.name}
-            </label>
-          ))}
-        </div>
+        {isUlNeeded && video && (
+          <div className="inline-flex flex-col max-h-60 items-start m-auto overflow-y-auto">
+            {loginUser.playlists.map((playlist) => (
+              <label key={playlist.id}>
+                <input
+                  type="checkbox"
+                  className="accent-plcol mr-1"
+                  checked={isInPlaylist(playlist, video.id)}
+                  onClick={() => {
+                    handleVideoToPlaylist(
+                      isInPlaylist(playlist, video.id),
+                      userDispatch,
+                      loginUser.encodedToken,
+                      video,
+                      playlist.id
+                    );
+                  }}
+                />
+                {playlist.name}
+              </label>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

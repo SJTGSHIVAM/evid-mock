@@ -14,6 +14,7 @@ export const Liked = () => {
   }, []);
   return (
     <div>
+      <h1 className=" text-xl px-3 font-bold">Liked Videos</h1>
       <VideoContainer>
         {loginUser.likes &&
           loginUser.likes.length > 0 &&

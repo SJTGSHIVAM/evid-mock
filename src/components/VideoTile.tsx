@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { useLogin } from 'hooks/context/user/userContext';
 import { Video } from 'interfaces';
 
 export const VideoTile = ({
@@ -10,11 +9,9 @@ export const VideoTile = ({
   video: Video;
   children?: React.ReactNode;
 }) => {
-  const { loginUser, userDispatch } = useLogin();
-
   return (
     <div
-      className="h-12 xs:h-14 flex flex-row border-2 rounded-md w-48 xs:w-64"
+      className="h-12 xs:h-14 flex flex-row border-2 m-1 rounded-md w-48 xs:w-64"
       key={video.id}
     >
       <img src={video.img} alt="" className="h-full w-12 xs:w-14 " />

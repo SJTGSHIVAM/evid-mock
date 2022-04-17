@@ -1,5 +1,12 @@
-import { useCallback } from 'react';
+import {
+  useCallback,
+  useState,
+} from 'react';
 
+import {
+  AddPlaylistPopup,
+  VideoContainer,
+} from 'components';
 import { VideoTile } from 'components/VideoTile';
 import { useLogin } from 'hooks/context/user/userContext';
 import {
@@ -20,6 +27,8 @@ import { UseUserReducerDispatch } from 'types';
 
 export const Playlists = () => {
   const { loginUser, userDispatch } = useLogin();
+  const [isAddPlaylistPopupVisible, setIsAddPlaylistPopupVisible] =
+    useState(false);
   const navigate = useNavigate();
   function handleDelPlayVidRaw(
     userDispatch: UseUserReducerDispatch,
@@ -45,16 +54,35 @@ export const Playlists = () => {
   const handleDelPlaylist = useCallback(throttle(handleDelPlayRaw, 1000), []);
   return (
     <div className="flex flex-col w-full h-full">
+      <h1 className=" text-xl px-3 font-bold">Playlists</h1>
+      {isAddPlaylistPopupVisible && (
+        <AddPlaylistPopup
+          setIsAddPlaylistPopupVisible={setIsAddPlaylistPopupVisible}
+          isUlNeeded={false}
+        />
+      )}
+      <button
+        className="w-max m-3 border-2 border-gacol px-2 rounded-xl hover:scale-105 ease-in-out duration-75 hover:bg-pcol"
+        onClick={(e) => {
+          e.stopPropagation();
+          setIsAddPlaylistPopupVisible(true);
+        }}
+      >
+        Add Playlist
+      </button>
       {loginUser.playlists.map((playlist) => (
         <div
           className="border-y-2 rounded-md p-1 xs:px-4 xs:pb-4 xs:pt-2 xs:w-[95%] xs:m-5 m-auto"
           key={playlist.id}
         >
-          <p className="text-lg font-mmedium pb-2"># {playlist.name}</p>
+          <p className="text-lg font-medium pb-2"># {playlist.name}</p>
+          <p className="text-sm font-medium pb-2">
+            Total videos: {playlist.videoList.length}
+          </p>
 
-          <div className="flex flex-row flex-wrap gap-4">
-            {playlist.videoList.map((video) => (
-              <VideoTile video={video}>
+          <VideoContainer>
+            {playlist.videoList.slice(0, 6).map((video) => (
+              <VideoTile video={video} key={video.id}>
                 <button
                   className="place-self-end pb-1 pr-1 hover:scale-105 mr-0 ml-auto"
                   onClick={(e) => {
@@ -70,7 +98,7 @@ export const Playlists = () => {
                 </button>
               </VideoTile>
             ))}
-          </div>
+          </VideoContainer>
           <div className="flex justify-between gap-1">
             <button
               className="flex flex-row items-center gap-1 border-2 border-gacol px-2 rounded-xl hover:scale-105 ease-in-out duration-75 hover:bg-pcol  mt-4"

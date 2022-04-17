@@ -12,9 +12,9 @@ export const WatchLater = () => {
     // this useEffect is being used for cache invalidation on arrival or refresh
     tokenUserLoginModule(userDispatch, loginUser.encodedToken);
   }, []);
-  console.log(loginUser);
   return (
     <div>
+      <h1 className=" text-xl px-3 font-bold">Watch Later</h1>
       <VideoContainer>
         {loginUser.watchLater &&
           loginUser.watchLater.length > 0 &&
