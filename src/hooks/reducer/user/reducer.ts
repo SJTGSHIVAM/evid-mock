@@ -73,7 +73,7 @@ export const useUserReducer = (initialUser: UserLoginData) => {
         );
         const selectedPlaylist = {
           ...state.playlists[selectedPlaylistIndex],
-          list: [
+          videoList: [
             ...state.playlists[selectedPlaylistIndex].videoList,
             action.payload.video,
           ],

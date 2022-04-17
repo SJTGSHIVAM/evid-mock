@@ -63,7 +63,7 @@ export const addHistoryModule = async (
   try {
     await addHistory(payload, token);
   } catch (error) {
-    dispatch({ type: UserActionType.ADD_HISTORY, payload });
+    dispatch({ type: UserActionType.DEL_HISTORY, payload: payload.id });
     toastError();
   }
 };
@@ -77,7 +77,7 @@ export const addLikedVideoModule = async (
   try {
     await addLike(payload, token);
   } catch (error) {
-    dispatch({ type: UserActionType.ADD_LIKED_VIDEO, payload });
+    dispatch({ type: UserActionType.DEL_LIKED_VIDEO, payload: payload.id });
     toastError();
   }
 };
@@ -91,7 +91,7 @@ export const addWatchLaterModule = async (
   try {
     await addWatchLater(payload, token);
   } catch (error) {
-    dispatch({ type: UserActionType.ADD_WATCH_LATER, payload });
+    dispatch({ type: UserActionType.DEL_WATCH_LATER, payload: payload.id });
     toastError();
   }
 };
@@ -99,13 +99,13 @@ export const addWatchLaterModule = async (
 export const delWatchLaterModule = async (
   dispatch: UseUserReducerDispatch,
   token: string,
-  payload: string
+  payload: Video
 ) => {
-  dispatch({ type: UserActionType.DEL_WATCH_LATER, payload });
+  dispatch({ type: UserActionType.DEL_WATCH_LATER, payload: payload.id });
   try {
-    await removeWatchLater(payload, token);
+    await removeWatchLater(payload.id, token);
   } catch (error) {
-    dispatch({ type: UserActionType.DEL_WATCH_LATER, payload });
+    dispatch({ type: UserActionType.ADD_WATCH_LATER, payload });
     toastError();
   }
 };
@@ -113,13 +113,13 @@ export const delWatchLaterModule = async (
 export const delHistoryModule = async (
   dispatch: UseUserReducerDispatch,
   token: string,
-  payload: string
+  payload: Video
 ) => {
-  dispatch({ type: UserActionType.DEL_HISTORY, payload });
+  dispatch({ type: UserActionType.DEL_HISTORY, payload: payload.id });
   try {
-    await removeHistory(payload, token);
+    await removeHistory(payload.id, token);
   } catch (error) {
-    dispatch({ type: UserActionType.DEL_HISTORY, payload });
+    dispatch({ type: UserActionType.ADD_HISTORY, payload });
     toastError();
   }
 };
@@ -127,13 +127,13 @@ export const delHistoryModule = async (
 export const delLikedVideoModule = async (
   dispatch: UseUserReducerDispatch,
   token: string,
-  payload: string
+  payload: Video
 ) => {
-  dispatch({ type: UserActionType.DEL_LIKED_VIDEO, payload });
+  dispatch({ type: UserActionType.DEL_LIKED_VIDEO, payload: payload.id });
   try {
-    await removeLike(payload, token);
+    await removeLike(payload.id, token);
   } catch (error) {
-    dispatch({ type: UserActionType.DEL_LIKED_VIDEO, payload });
+    dispatch({ type: UserActionType.ADD_LIKED_VIDEO, payload });
     toastError();
   }
 };
@@ -141,13 +141,13 @@ export const delLikedVideoModule = async (
 export const delPlaylistModule = async (
   dispatch: UseUserReducerDispatch,
   token: string,
-  payload: string
+  payload: Playlist
 ) => {
-  dispatch({ type: UserActionType.DEL_PLAYLIST, payload });
+  dispatch({ type: UserActionType.DEL_PLAYLIST, payload: payload.id });
   try {
-    await removePlaylist(payload, token);
+    await removePlaylist(payload.id, token);
   } catch (error) {
-    dispatch({ type: UserActionType.DEL_PLAYLIST, payload });
+    dispatch({ type: UserActionType.ADD_PLAYLIST, payload });
     toastError();
   }
 };
@@ -161,7 +161,7 @@ export const addPlaylistModule = async (
   try {
     await addPlaylist(payload, token);
   } catch (error) {
-    dispatch({ type: UserActionType.ADD_PLAYLIST, payload });
+    dispatch({ type: UserActionType.DEL_PLAYLIST, payload: payload.id });
     toastError();
   }
 };
@@ -175,7 +175,10 @@ export const addlPlaylistVideoModule = async (
   try {
     await addPlaylistVideo(payload, token);
   } catch (error) {
-    dispatch({ type: UserActionType.ADD_PLAYLIST_VIDEO, payload });
+    dispatch({
+      type: UserActionType.DEL_PLAYLIST_VIDEO,
+      payload: { videoId: payload.video.id, playlistId: payload.playlistId },
+    });
     toastError();
   }
 };
@@ -183,13 +186,19 @@ export const addlPlaylistVideoModule = async (
 export const delPlaylistVideoModule = async (
   dispatch: UseUserReducerDispatch,
   token: string,
-  payload: { videoId: string; playlistId: string }
+  payload: { video: Video; playlistId: string }
 ) => {
-  dispatch({ type: UserActionType.DEL_PLAYLIST_VIDEO, payload });
+  dispatch({
+    type: UserActionType.DEL_PLAYLIST_VIDEO,
+    payload: { videoId: payload.video.id, playlistId: payload.playlistId },
+  });
   try {
-    await removePlaylistVideo(payload, token);
+    await removePlaylistVideo(
+      { videoId: payload.video.id, playlistId: payload.playlistId },
+      token
+    );
   } catch (error) {
-    dispatch({ type: UserActionType.DEL_PLAYLIST_VIDEO, payload });
+    dispatch({ type: UserActionType.ADD_PLAYLIST_VIDEO, payload });
     toastError();
   }
 };
