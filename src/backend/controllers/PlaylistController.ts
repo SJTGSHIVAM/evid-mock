@@ -49,8 +49,8 @@ export const addNewPlaylistHandler = function (schema, request) {
   if (user) {
     const playlist = JSON.parse(request.requestBody);
     const name = playlist.name;
-    const list = playlist.list === undefined ? [] : playlist.list;
-    user.playlists.push({ name, list, id: playlist.id });
+    const videoList = playlist.list === undefined ? [] : playlist.list;
+    user.playlists.push({ name, videoList, id: playlist.id });
     return new Response(201, {}, { playlists: user.playlists });
   }
   return new Response(
@@ -118,7 +118,9 @@ export const addVideoToPlaylistHandler = function (schema, request) {
   if (user) {
     const playlistId = request.params.playlistId;
     const { video } = JSON.parse(request.requestBody);
+
     const playlist = user.playlists.find((item) => item.id === playlistId);
+
     if (playlist.videoList.some((item) => item.id === video.id)) {
       return new Response(201, {}, { playlist });
     }

@@ -25,17 +25,11 @@ export const Navbar = () => {
   }
   const { loginUser, userDispatch, isAuth } = useLogin();
   return (
-    <nav className="bg-gacol p-4 text-wcol flex">
-      <div className="mr-auto">
-        {" "}
-        {isAuth() && (
-          <Link to="user/profile">
-            <div className="rounded-full bg-lcol cursor-pointer text-dcol w-[3ex] text-center font-bold xs:text-lg">
-              {loginUser.fname[0].toUpperCase()}
-            </div>
-          </Link>
-        )}
+    <nav className="bg-gacol p-4 px-1 xs:px-4 text-wcol flex items-baseline">
+      <div className=" cursor-pointer text-wcol mx-2 flex text-center font-bold xs:text-2xl text-xl ">
+        Evid
       </div>
+
       <div className="mx-auto flex justify-center">
         <input
           type="text"
@@ -57,11 +51,20 @@ export const Navbar = () => {
         >
           {theme === "dark" ? <BsSunFill /> : <BsFillMoonStarsFill />}
         </button>
-
+        <div className="ml-1 xs:ml-2">
+          {" "}
+          {isAuth() && (
+            <Link to="user/profile">
+              <div className="rounded-full bg-lcol cursor-pointer text-dcol w-[3ex] text-center font-bold xs:text-lg">
+                {loginUser.fname[0].toUpperCase()}
+              </div>
+            </Link>
+          )}
+        </div>
         {pathname !== "/user/login" &&
           (isAuth() ? (
             <button
-              className="flex flex-row gap-2 border-2 ml-2 border-pcol px-2 xs:px-4 rounded-xl hover:scale-105 ease-in-out hover:bg-bcol"
+              className="flex flex-row gap-2 border-2 ml-1 xs:ml-2 text-sm xs:text-base border-pcol px-2 xs:px-4 rounded-xl hover:scale-105 ease-in-out hover:bg-bcol"
               onClick={() => {
                 userLogoutModule(userDispatch);
               }}
@@ -70,7 +73,7 @@ export const Navbar = () => {
             </button>
           ) : (
             <button
-              className="flex flex-row gap-2 border-2 ml-2 border-pcol px-2 xs:px-4 rounded-xl hover:scale-105 ease-in-out hover:bg-bcol"
+              className="flex flex-row gap-2 border-2 ml-2 text-sm xs:text-base border-pcol px-2 xs:px-4 rounded-xl hover:scale-105 ease-in-out hover:bg-bcol"
               onClick={() => {
                 navigate("user/login");
               }}

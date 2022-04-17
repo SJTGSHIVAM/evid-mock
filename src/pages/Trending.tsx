@@ -6,6 +6,7 @@ export const Trending = () => {
   const { videoList } = useVideoList();
   return (
     <div>
+      <h1 className=" text-xl px-3 font-bold">Trending</h1>
       <VideoContainer>
         {videoList &&
           videoList.length > 0 &&

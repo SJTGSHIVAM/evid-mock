@@ -4,11 +4,21 @@ import { useLogin } from 'hooks/context/user/userContext';
 import { userLoginModule } from 'hooks/context/user/userContextModule';
 import { AiOutlineUserAdd } from 'react-icons/ai';
 import { BiLockOpen } from 'react-icons/bi';
-import { useNavigate } from 'react-router-dom';
+import {
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 
 export const Login = () => {
   const [username, setUsername] = useState("sjtgshivam");
   const [password, setPassword] = useState("acheDin");
+  type LocationProps = {
+    state: {
+      from: Location;
+    };
+  };
+  const location = useLocation() as unknown as LocationProps;
+  const from = location.state?.from?.pathname || "/";
   const { userDispatch } = useLogin();
   const navigate = useNavigate();
   return (
@@ -48,7 +58,7 @@ export const Login = () => {
               username,
               password,
             });
-            if (isLoginSuccess) navigate("/");
+            if (isLoginSuccess) navigate(from);
             else {
               setPassword("");
               setUsername("");

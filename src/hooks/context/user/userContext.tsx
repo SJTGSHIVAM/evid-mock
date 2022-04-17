@@ -1,7 +1,7 @@
 import {
   createContext,
   useContext,
-  useEffect,
+  useLayoutEffect,
 } from 'react';
 
 import { useUserReducer } from 'hooks/reducer/user/reducer';
@@ -46,7 +46,8 @@ export const UserProvider = ({
   const isAuth = () => {
     return !(user.username === "" || user.username === undefined);
   };
-  useEffect(() => {
+
+  useLayoutEffect(() => {
     const savedToken = localStorage.getItem("token");
     if (savedToken) tokenUserLoginModule(userDispatch, savedToken);
   }, []);

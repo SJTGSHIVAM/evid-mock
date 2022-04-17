@@ -4,6 +4,7 @@ import {
   addPlaylist,
   addPlaylistVideo,
   addWatchLater,
+  deleteAllHistory,
   getUser,
   removeHistory,
   removeLike,
@@ -120,6 +121,19 @@ export const delHistoryModule = async (
     await removeHistory(payload.id, token);
   } catch (error) {
     dispatch({ type: UserActionType.ADD_HISTORY, payload });
+    toastError();
+  }
+};
+
+export const delAllHistoryModule = async (
+  dispatch: UseUserReducerDispatch,
+  token: string
+) => {
+  dispatch({ type: UserActionType.DEL_ALL_HISTORY });
+  try {
+    await deleteAllHistory(token);
+  } catch (error) {
+    tokenUserLoginModule(dispatch, token);
     toastError();
   }
 };

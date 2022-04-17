@@ -12,15 +12,19 @@ export const WatchLater = () => {
     // this useEffect is being used for cache invalidation on arrival or refresh
     tokenUserLoginModule(userDispatch, loginUser.encodedToken);
   }, []);
-  console.log(loginUser);
   return (
     <div>
+      <h1 className=" text-xl px-3 font-bold">Watch Later</h1>
       <VideoContainer>
-        {loginUser.watchLater &&
-          loginUser.watchLater.length > 0 &&
+        {loginUser.watchLater && loginUser.watchLater.length > 0 ? (
           loginUser.watchLater.map((video) => (
             <VideoCard video={video} key={video.id} />
-          ))}
+          ))
+        ) : (
+          <div className="mx-auto">
+            You have not marked any video to watch later.
+          </div>
+        )}
       </VideoContainer>
     </div>
   );

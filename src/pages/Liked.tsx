@@ -14,12 +14,15 @@ export const Liked = () => {
   }, []);
   return (
     <div>
+      <h1 className=" text-xl px-3 font-bold">Liked Videos</h1>
       <VideoContainer>
-        {loginUser.likes &&
-          loginUser.likes.length > 0 &&
+        {loginUser.likes && loginUser.likes.length > 0 ? (
           loginUser.likes.map((video) => (
             <VideoCard video={video} key={video.id} />
-          ))}
+          ))
+        ) : (
+          <div className="mx-auto"> You have not liked any video yet.</div>
+        )}
       </VideoContainer>
     </div>
   );

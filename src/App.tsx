@@ -14,6 +14,7 @@ import {
   Home,
   Liked,
   Login,
+  PlaylistPage,
   Playlists,
   SingleVideo,
   Trending,
@@ -59,6 +60,7 @@ export default function App() {
             <Route path="history" element={<History />} />
             <Route path="watchlater" element={<WatchLater />} />
             <Route path="playlists" element={<Playlists />} />
+            <Route path="playlist/:playlistId" element={<PlaylistPage />} />
           </Route>
 
           <Route path="/q" element={<Mockman />} />
