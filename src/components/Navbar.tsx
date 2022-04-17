@@ -51,7 +51,7 @@ export const Navbar = () => {
         >
           {theme === "dark" ? <BsSunFill /> : <BsFillMoonStarsFill />}
         </button>
-        <div className="mx-auto">
+        <div className="ml-1 xs:ml-2">
           {" "}
           {isAuth() && (
             <Link to="user/profile">
@@ -64,7 +64,7 @@ export const Navbar = () => {
         {pathname !== "/user/login" &&
           (isAuth() ? (
             <button
-              className="flex flex-row gap-2 border-2 ml-2 text-sm xs:text-base border-pcol px-2 xs:px-4 rounded-xl hover:scale-105 ease-in-out hover:bg-bcol"
+              className="flex flex-row gap-2 border-2 ml-1 xs:ml-2 text-sm xs:text-base border-pcol px-2 xs:px-4 rounded-xl hover:scale-105 ease-in-out hover:bg-bcol"
               onClick={() => {
                 userLogoutModule(userDispatch);
               }}

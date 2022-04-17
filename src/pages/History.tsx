@@ -54,27 +54,29 @@ export const History = () => {
         Clear All History
       </button>
       <VideoContainer>
-        {loginUser.history && loginUser.history.length > 0
-          ? loginUser.history.map((video) => (
-              <VideoCard video={video} key={video.id}>
-                <span
-                  className="flex flex-row items-center gap-0.5 "
-                  onClick={(e) => {
-                    e.stopPropagation();
+        {loginUser.history && loginUser.history.length > 0 ? (
+          loginUser.history.map((video) => (
+            <VideoCard video={video} key={video.id}>
+              <span
+                className="flex flex-row items-center gap-0.5 "
+                onClick={(e) => {
+                  e.stopPropagation();
 
-                    handleHistory(
-                      isinHistory(loginUser, video.id),
-                      userDispatch,
-                      loginUser.encodedToken,
-                      video
-                    );
-                  }}
-                >
-                  {isinHistory(loginUser, video.id) && <IoMdTrash />}
-                </span>
-              </VideoCard>
-            ))
-          : "Your history is empty."}
+                  handleHistory(
+                    isinHistory(loginUser, video.id),
+                    userDispatch,
+                    loginUser.encodedToken,
+                    video
+                  );
+                }}
+              >
+                {isinHistory(loginUser, video.id) && <IoMdTrash />}
+              </span>
+            </VideoCard>
+          ))
+        ) : (
+          <div className="mx-auto"> "Your history is empty."</div>
+        )}
       </VideoContainer>
     </div>
   );

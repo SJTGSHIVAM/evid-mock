@@ -49,7 +49,7 @@ const SidebarIcon = ({
   <Link to={to}>
     <div className="sidebar-icon cursor-pointer group m-2">
       <span className="text-pcol text-xl xs:text-4xl">{icon}</span>
-      <span className="sidebar-tooltip bg-lcol hidden border border-dcol m-2 p-1 group-hover:block group-hover:fixed">
+      <span className="sidebar-tooltip bg-lcol hidden border border-dcol m-2 p-1 xs:group-hover:block group-hover:fixed">
         {text}
       </span>
     </div>
