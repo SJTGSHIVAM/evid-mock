@@ -3,7 +3,9 @@ import { useCallback } from 'react';
 import { useLogin } from 'hooks/context/user/userContext';
 import {
   addLikedVideoModule,
+  addWatchLaterModule,
   delLikedVideoModule,
+  delWatchLaterModule,
 } from 'hooks/context/user/userContextModule';
 import {
   UserLoginData,
@@ -15,6 +17,10 @@ import {
   FcLikePlaceholder,
 } from 'react-icons/fc';
 import { IoIosEye } from 'react-icons/io';
+import {
+  MdOutlineWatchLater,
+  MdWatchLater,
+} from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { UseUserReducerDispatch } from 'types';
 
@@ -24,6 +30,8 @@ export const VideoCard = ({ video }: { video: Video }) => {
   const navigate = useNavigate();
   const isVideoLiked = (loginUser: UserLoginData, videoId: string) =>
     loginUser.likes.some((video: Video) => video.id === videoId);
+  const isinWatchLater = (loginUser: UserLoginData, videoId: string) =>
+    loginUser.watchLater.some((video: Video) => video.id === videoId);
   function handleLikeRaw(
     liked: boolean,
     userDispatch: UseUserReducerDispatch,
@@ -34,6 +42,18 @@ export const VideoCard = ({ video }: { video: Video }) => {
     else addLikedVideoModule(userDispatch, encodedToken, video);
   }
   const handleLike = useCallback(throttle(handleLikeRaw, 1000), []);
+
+  function handleWatchLaterRaw(
+    watchLater: boolean,
+    userDispatch: UseUserReducerDispatch,
+    encodedToken: string,
+    video: Video
+  ) {
+    if (watchLater) delWatchLaterModule(userDispatch, encodedToken, video);
+    else addWatchLaterModule(userDispatch, encodedToken, video);
+  }
+  const handleWatchLater = useCallback(throttle(handleWatchLaterRaw, 1000), []);
+
   return (
     <div
       className="border-2 border-gacol p-1 xs:p-2 m-2 xs:m-4 w-max rounded-md cursor-pointer"
@@ -72,6 +92,25 @@ export const VideoCard = ({ video }: { video: Video }) => {
                 <FcLikePlaceholder />
               )}
               {likes}
+            </span>
+            <span
+              className="flex flex-row items-center gap-0.5 text-sm"
+              onClick={(e) => {
+                e.stopPropagation();
+
+                handleWatchLater(
+                  isinWatchLater(loginUser, video.id),
+                  userDispatch,
+                  loginUser.encodedToken,
+                  video
+                );
+              }}
+            >
+              {isinWatchLater(loginUser, video.id) ? (
+                <MdWatchLater />
+              ) : (
+                <MdOutlineWatchLater />
+              )}
             </span>
           </div>
           <span className="flex flex-row items-center gap-1 ">
