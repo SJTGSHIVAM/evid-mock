@@ -30,7 +30,7 @@ export const Navbar = () => {
         {" "}
         {isAuth() && (
           <Link to="user/profile">
-            <div className="rounded-full bg-lcol cursor-pointer text-dcol w-[2.7ex] text-center font-bold ">
+            <div className="rounded-full bg-lcol cursor-pointer text-dcol w-[3ex] text-center font-bold xs:text-lg">
               {loginUser.fname[0].toUpperCase()}
             </div>
           </Link>
@@ -58,17 +58,26 @@ export const Navbar = () => {
           {theme === "dark" ? <BsSunFill /> : <BsFillMoonStarsFill />}
         </button>
 
-        {pathname !== "/login" && isAuth() ? (
-          <button
-            onClick={() => {
-              userLogoutModule(userDispatch);
-            }}
-          >
-            Logout
-          </button>
-        ) : (
-          <Link to="user/login"> Login</Link>
-        )}
+        {pathname !== "/user/login" &&
+          (isAuth() ? (
+            <button
+              className="flex flex-row gap-2 border-2 ml-2 border-pcol px-2 xs:px-4 rounded-xl hover:scale-105 ease-in-out hover:bg-bcol"
+              onClick={() => {
+                userLogoutModule(userDispatch);
+              }}
+            >
+              Logout
+            </button>
+          ) : (
+            <button
+              className="flex flex-row gap-2 border-2 ml-2 border-pcol px-2 xs:px-4 rounded-xl hover:scale-105 ease-in-out hover:bg-bcol"
+              onClick={() => {
+                navigate("user/login");
+              }}
+            >
+              Login
+            </button>
+          ))}
       </div>
     </nav>
   );

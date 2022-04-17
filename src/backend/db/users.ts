@@ -26,7 +26,7 @@ export const users = [
       {
         id: "2",
         name: "fun",
-        videoList: [videos[5], videos[3], videos[6]],
+        videoList: [videos[5], videos[3], videos[6], videos[2]],
       },
     ],
     createdAt: formatDate(),

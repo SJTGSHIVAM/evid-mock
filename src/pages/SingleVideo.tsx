@@ -4,6 +4,7 @@ import {
   useState,
 } from 'react';
 
+import { AddPlaylistPopup } from 'components';
 import { useLogin } from 'hooks/context/user/userContext';
 import {
   addHistoryModule,
@@ -34,6 +35,8 @@ import { UseUserReducerDispatch } from 'types';
 export const SingleVideo = () => {
   const { videoList } = useVideoList();
   const [currentVideo, setCurrentVideo] = useState<Video>();
+  const [isAddPlaylistPopupVisible, setIsAddPlaylistPopupVisible] =
+    useState(false);
   const { videoId } = useParams();
   const { loginUser, userDispatch, isAuth } = useLogin();
   const isVideoLiked = (loginUser: UserLoginData, videoId: string) =>
@@ -77,6 +80,12 @@ export const SingleVideo = () => {
         currentVideo &&
         videoId && (
           <div className="w-full h-full grid">
+            {isAddPlaylistPopupVisible && (
+              <AddPlaylistPopup
+                setIsAddPlaylistPopupVisible={setIsAddPlaylistPopupVisible}
+                video={currentVideo}
+              />
+            )}
             <div className="flex flex-col w-[95%] mx-auto p-2">
               <iframe
                 className="w-full sm:h-3/5 md:h-4/5"
@@ -143,7 +152,10 @@ export const SingleVideo = () => {
                       Watch Later
                     </p>
                   </button>
-                  <button className="flex flex-row gap-2 border-2 border-gacol sm:px-2 rounded-xl hover:scale-105 ease-in-out hover:bg-pcol">
+                  <button
+                    className="flex flex-row gap-2 border-2 border-gacol sm:px-2 rounded-xl hover:scale-105 ease-in-out hover:bg-pcol"
+                    onClick={() => setIsAddPlaylistPopupVisible(true)}
+                  >
                     <div className="self-center text-xl">
                       <CgPlayList />
                     </div>
