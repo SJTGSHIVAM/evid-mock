@@ -15,7 +15,10 @@ import {
 } from 'interfaces';
 import throttle from 'lodash.throttle';
 import { UseUserReducerDispatch } from 'types';
-import { toastSuccess } from 'utils';
+import {
+  toastError,
+  toastSuccess,
+} from 'utils';
 import { v4 as uuid } from 'uuid';
 
 export const AddPlaylistPopup = ({
@@ -98,12 +101,14 @@ export const AddPlaylistPopup = ({
           <button
             className="px-2 my-2 border-2 border-gacol rounded-md bg-pcol hover:bg-plcol "
             onClick={() =>
-              handleAddNewPlaylist(
-                userDispatch,
-                loginUser.encodedToken,
-                video,
-                playlistName
-              )
+              playlistName.trim() !== ""
+                ? handleAddNewPlaylist(
+                    userDispatch,
+                    loginUser.encodedToken,
+                    video,
+                    playlistName
+                  )
+                : toastError("Please add a name for playlist  ")
             }
           >
             Add
