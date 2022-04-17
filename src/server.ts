@@ -60,7 +60,7 @@ export function makeServer({ environment = "development" } = {}) {
       like: Model,
       history: Model,
       playlist: Model,
-      watchlater: Model,
+      watchLater: Model,
     },
 
     // Runs on the start of the server
