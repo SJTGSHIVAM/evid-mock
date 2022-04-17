@@ -29,16 +29,7 @@ export const Navbar = () => {
       <div className=" cursor-pointer text-wcol mx-2 flex text-center font-bold xs:text-2xl text-xl ">
         Evid
       </div>
-      <div className="mr-auto">
-        {" "}
-        {isAuth() && (
-          <Link to="user/profile">
-            <div className="rounded-full bg-lcol cursor-pointer text-dcol w-[3ex] text-center font-bold xs:text-lg">
-              {loginUser.fname[0].toUpperCase()}
-            </div>
-          </Link>
-        )}
-      </div>
+
       <div className="mx-auto flex justify-center">
         <input
           type="text"
@@ -60,7 +51,16 @@ export const Navbar = () => {
         >
           {theme === "dark" ? <BsSunFill /> : <BsFillMoonStarsFill />}
         </button>
-
+        <div className="mx-auto">
+          {" "}
+          {isAuth() && (
+            <Link to="user/profile">
+              <div className="rounded-full bg-lcol cursor-pointer text-dcol w-[3ex] text-center font-bold xs:text-lg">
+                {loginUser.fname[0].toUpperCase()}
+              </div>
+            </Link>
+          )}
+        </div>
         {pathname !== "/user/login" &&
           (isAuth() ? (
             <button
