@@ -21,7 +21,7 @@ export const Liked = () => {
             <VideoCard video={video} key={video.id} />
           ))
         ) : (
-          <div className="mx-auto"> "You have not liked any video yet."</div>
+          <div className="mx-auto"> You have not liked any video yet.</div>
         )}
       </VideoContainer>
     </div>

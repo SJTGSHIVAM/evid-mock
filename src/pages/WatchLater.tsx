@@ -22,7 +22,7 @@ export const WatchLater = () => {
           ))
         ) : (
           <div className="mx-auto">
-            "You have not marked any video to watch later."
+            You have not marked any video to watch later.
           </div>
         )}
       </VideoContainer>

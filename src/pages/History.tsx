@@ -75,7 +75,7 @@ export const History = () => {
             </VideoCard>
           ))
         ) : (
-          <div className="mx-auto"> "Your history is empty."</div>
+          <div className="mx-auto">Your history is empty.</div>
         )}
       </VideoContainer>
     </div>

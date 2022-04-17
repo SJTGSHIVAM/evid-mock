@@ -127,7 +127,7 @@ export const Playlists = () => {
           </div>
         ))
       ) : (
-        <div className="mx-auto">"There is no custom playlist to display."</div>
+        <div className="mx-auto">There is no custom playlist to display.</div>
       )}
     </div>
   );
