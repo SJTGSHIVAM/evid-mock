@@ -167,7 +167,7 @@ In computer science, a trie, also called digital tree and sometimes radix tree o
   {
     id: "lhToWeuWWfw",
     tags: ["Operating Systems", "trending", "system calls"],
-    img: "https://i.ytimg.com/an_webp/lhToWeuWWfw/mqdefault_6s.webp?du=3000&sqp=CMjb15IG&rs=AOn4CLCNdEPEb2lPMRy5w5i5jF2kqwX_Xw",
+    img: "https://i.ytimg.com/vi/8325iyeWbRY/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDqFvq-LWUuBsvZr6s0vMD7_sJn7g",
     title: "System Calls",
     creator: "Neso Academy",
     avatar:
