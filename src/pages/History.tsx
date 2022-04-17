@@ -8,6 +8,7 @@ import { VideoCard } from 'components/VideoCard';
 import { useLogin } from 'hooks/context/user/userContext';
 import {
   addHistoryModule,
+  delAllHistoryModule,
   delHistoryModule,
   tokenUserLoginModule,
 } from 'hooks/context/user/userContextModule';
@@ -42,6 +43,16 @@ export const History = () => {
   return (
     <div>
       <h1 className=" text-xl px-3 font-bold">History</h1>
+      <button
+        className="w-max m-3 border-2 border-gacol px-2 rounded-xl hover:scale-105 ease-in-out duration-75 hover:bg-rcol"
+        onClick={(e) => {
+          e.stopPropagation();
+          delAllHistoryModule(userDispatch, loginUser.encodedToken);
+        }}
+      >
+        {" "}
+        Clear All History
+      </button>
       <VideoContainer>
         {loginUser.history &&
           loginUser.history.length > 0 &&

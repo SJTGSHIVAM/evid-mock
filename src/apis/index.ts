@@ -66,14 +66,16 @@ const addHistory = async (video: Video, encodedToken: string) =>
 
 const removeHistory = async (id: string, encodedToken: string) =>
   axios
-    .delete<{ history: Array<Video> }>(`${BASE_API_URL}/user/history/` + id, {
+    .delete<{ history: Array<Video> }>(`${BASE_API_URL}/user/history/${id}`, {
       headers: { authorization: encodedToken },
     })
     .then((res) => res.data.history);
 
-const deleteAllHistory = async () =>
+const deleteAllHistory = async (encodedToken: string) =>
   axios
-    .delete<{ history: Array<Video> }>(`${BASE_API_URL}/user/history/all`)
+    .delete<{ history: Array<Video> }>(`${BASE_API_URL}/user/history/all`, {
+      headers: { authorization: encodedToken },
+    })
     .then((res) => res.data.history);
 
 const addLike = async (video: Video, encodedToken: string) =>
@@ -87,7 +89,7 @@ const addLike = async (video: Video, encodedToken: string) =>
 
 const removeLike = async (id: string, encodedToken: string) =>
   axios
-    .delete<{ likes: Array<Video> }>(`${BASE_API_URL}/user/likes/` + id, {
+    .delete<{ likes: Array<Video> }>(`${BASE_API_URL}/user/likes/${id}`, {
       headers: { authorization: encodedToken },
     })
     .then((res) => res.data.likes);
@@ -104,7 +106,7 @@ const addWatchLater = async (video: Video, encodedToken: string) =>
 const removeWatchLater = async (id: string, encodedToken: string) =>
   axios
     .delete<{ watchLater: Array<Video> }>(
-      `${BASE_API_URL}/user/watchlater/` + id,
+      `${BASE_API_URL}/user/watchlater/${id}`,
       {
         headers: { authorization: encodedToken },
       }
@@ -132,7 +134,7 @@ const addPlaylist = async (playlist: Playlist, encodedToken: string) =>
 const removePlaylist = async (id: string, encodedToken: string) =>
   axios
     .delete<{ playlists: Array<Playlist> }>(
-      `${BASE_API_URL}/user/playlists/` + id,
+      `${BASE_API_URL}/user/playlists/${id}`,
       {
         headers: { authorization: encodedToken },
       }
@@ -141,7 +143,7 @@ const removePlaylist = async (id: string, encodedToken: string) =>
 
 const getPlaylistVideos = async (id: string, encodedToken: string) =>
   axios
-    .get<{ playlist: Playlist }>(`${BASE_API_URL}/user/playlists/` + id, {
+    .get<{ playlist: Playlist }>(`${BASE_API_URL}/user/playlists/${id}`, {
       headers: { authorization: encodedToken },
     })
     .then((res) => res.data.playlist);

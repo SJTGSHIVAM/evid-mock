@@ -29,6 +29,9 @@ export const useUserReducer = (initialUser: UserLoginData) => {
         );
         return { ...state, history: newHistory };
 
+      case UserActionType.DEL_ALL_HISTORY:
+        return { ...state, history: [] };
+
       case UserActionType.ADD_LIKED_VIDEO:
         return {
           ...state,

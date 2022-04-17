@@ -23,6 +23,7 @@ export type UserReducerAction =
       payload: { videoId: string; playlistId: string };
     }
   | { type: UserActionType.ADD_PLAYLIST; payload: Playlist }
-  | { type: UserActionType.DEL_HISTORY; payload: string };
+  | { type: UserActionType.DEL_HISTORY; payload: string }
+  | { type: UserActionType.DEL_ALL_HISTORY };
 
 export type UseUserReducerDispatch = React.Dispatch<UserReducerAction>;
