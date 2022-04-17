@@ -15,7 +15,7 @@ const Sidebar = () => {
     <div className="bg-gacol  sticky top-0 h-full  max-h-screen w-max ">
       <div className="sticky top-0 overflow-auto">
         <SidebarIcon to="/" text="Home" icon={<IoHome />} />
-        <SidebarIcon to="treanding" text="Treanding" icon={<AiTwotoneFire />} />
+        <SidebarIcon to="trending" text="Trending" icon={<AiTwotoneFire />} />
         <SidebarIcon
           to="user/playlists"
           text="Playlists"

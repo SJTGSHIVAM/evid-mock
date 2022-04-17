@@ -1,6 +1,6 @@
 export { Home } from './Home';
 export { Login } from './Login';
-export { Treanding } from './Treanding';
+export { Trending } from './Trending';
 export { Liked } from './Liked';
 export { History } from './History';
 export { WatchLater } from './WatchLater';
