@@ -24,7 +24,13 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { UseUserReducerDispatch } from 'types';
 
-export const VideoCard = ({ video }: { video: Video }) => {
+export const VideoCard = ({
+  video,
+  children,
+}: {
+  video: Video;
+  children?: React.ReactNode;
+}) => {
   const { id, img, title, avatar, creator, views, likes } = video;
   const { loginUser, isAuth, userDispatch } = useLogin();
   const navigate = useNavigate();
@@ -112,6 +118,7 @@ export const VideoCard = ({ video }: { video: Video }) => {
                 <MdOutlineWatchLater />
               )}
             </span>
+            {children}
           </div>
           <span className="flex flex-row items-center gap-1 ">
             <img src={avatar} alt="" className="h-5 xs:h-6 rounded-2xl" />
