@@ -23,6 +23,7 @@ import {
 } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { UseUserReducerDispatch } from 'types';
+import { toastError } from 'utils';
 
 export const VideoCard = ({
   video,
@@ -84,12 +85,18 @@ export const VideoCard = ({
               className="flex flex-row items-center gap-0.5 text-sm"
               onClick={(e) => {
                 e.stopPropagation();
-                handleLike(
-                  isVideoLiked(loginUser, video.id),
-                  userDispatch,
-                  loginUser.encodedToken,
-                  video
-                );
+
+                if (isAuth()) {
+                  handleLike(
+                    isVideoLiked(loginUser, video.id),
+                    userDispatch,
+                    loginUser.encodedToken,
+                    video
+                  );
+                } else {
+                  navigate("/user/login");
+                  toastError("Please login first");
+                }
               }}
             >
               {isVideoLiked(loginUser, video.id) ? (
@@ -103,13 +110,17 @@ export const VideoCard = ({
               className="flex flex-row items-center gap-0.5 text-sm"
               onClick={(e) => {
                 e.stopPropagation();
-
-                handleWatchLater(
-                  isinWatchLater(loginUser, video.id),
-                  userDispatch,
-                  loginUser.encodedToken,
-                  video
-                );
+                if (isAuth()) {
+                  handleWatchLater(
+                    isinWatchLater(loginUser, video.id),
+                    userDispatch,
+                    loginUser.encodedToken,
+                    video
+                  );
+                } else {
+                  navigate("/user/login");
+                  toastError("Please login first");
+                }
               }}
             >
               {isinWatchLater(loginUser, video.id) ? (

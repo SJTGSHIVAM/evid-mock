@@ -46,6 +46,7 @@ export const UserProvider = ({
   const isAuth = () => {
     return !(user.username === "" || user.username === undefined);
   };
+
   useEffect(() => {
     const savedToken = localStorage.getItem("token");
     if (savedToken) tokenUserLoginModule(userDispatch, savedToken);

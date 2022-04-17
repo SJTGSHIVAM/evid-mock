@@ -29,8 +29,12 @@ import {
   MdOutlineWatchLater,
   MdWatchLater,
 } from 'react-icons/md';
-import { useParams } from 'react-router-dom';
+import {
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
 import { UseUserReducerDispatch } from 'types';
+import { toastError } from 'utils';
 
 export const SingleVideo = () => {
   const { videoList } = useVideoList();
@@ -39,6 +43,7 @@ export const SingleVideo = () => {
     useState(false);
   const { videoId } = useParams();
   const { loginUser, userDispatch, isAuth } = useLogin();
+  const navigate = useNavigate();
   const isVideoLiked = (loginUser: UserLoginData, videoId: string) =>
     loginUser.likes.some((video: Video) => video.id === videoId);
   const isinWatchLater = (loginUser: UserLoginData, videoId: string) =>
@@ -108,14 +113,19 @@ export const SingleVideo = () => {
                 <div className="flex flex-row gap-4 ml-auto mt-2">
                   <button
                     className="flex flex-row gap-2 border-2 border-gacol p-1 sm:px-2 rounded-xl hover:scale-105 ease-in-out hover:bg-pcol"
-                    onClick={() =>
-                      handleLike(
-                        isVideoLiked(loginUser, videoId),
-                        userDispatch,
-                        loginUser.encodedToken,
-                        currentVideo
-                      )
-                    }
+                    onClick={() => {
+                      if (isAuth()) {
+                        handleLike(
+                          isVideoLiked(loginUser, videoId),
+                          userDispatch,
+                          loginUser.encodedToken,
+                          currentVideo
+                        );
+                      } else {
+                        navigate("/user/login");
+                        toastError("Please login first");
+                      }
+                    }}
                   >
                     <div className="self-center">
                       {isVideoLiked(loginUser, videoId) ? (
@@ -131,14 +141,19 @@ export const SingleVideo = () => {
                   </button>
                   <button
                     className="flex flex-row gap-2 border-2 border-gacol sm:px-2 rounded-xl hover:scale-105 ease-in-out hover:bg-pcol"
-                    onClick={() =>
-                      handleWatchLater(
-                        isinWatchLater(loginUser, videoId),
-                        userDispatch,
-                        loginUser.encodedToken,
-                        currentVideo
-                      )
-                    }
+                    onClick={() => {
+                      if (isAuth()) {
+                        handleWatchLater(
+                          isinWatchLater(loginUser, videoId),
+                          userDispatch,
+                          loginUser.encodedToken,
+                          currentVideo
+                        );
+                      } else {
+                        navigate("/user/login");
+                        toastError("Please login first");
+                      }
+                    }}
                   >
                     <div className="self-center">
                       {isinWatchLater(loginUser, videoId) ? (
@@ -154,7 +169,14 @@ export const SingleVideo = () => {
                   </button>
                   <button
                     className="flex flex-row gap-2 border-2 border-gacol sm:px-2 rounded-xl hover:scale-105 ease-in-out hover:bg-pcol"
-                    onClick={() => setIsAddPlaylistPopupVisible(true)}
+                    onClick={() => {
+                      if (isAuth()) {
+                        setIsAddPlaylistPopupVisible(true);
+                      } else {
+                        navigate("/user/login");
+                        toastError("Please login first");
+                      }
+                    }}
                   >
                     <div className="self-center text-xl">
                       <CgPlayList />
